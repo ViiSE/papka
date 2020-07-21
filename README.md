@@ -20,7 +20,7 @@ You have a raw filename list:
 
 You can use <code>Folder</code> interface:
 ```java
- Folder<String> root = new FolderRawText<>(
+ Folder<String> root = new FolderRawText(
     "/root1.png",
     "/root2.png",
     "/root3.png",
