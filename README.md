@@ -144,7 +144,7 @@ Search is carried out through the <code>Find</code> interface.
 <b>Find folders</b>
 ```java
  FindFolders<String, String> find = new FindFoldersByRegex<>(root);
- List<Folder<String>> folders = find.answer("bch") // {bch}
+ List<Folder<String>> folders = find.answer("^b.*$) // {bch, bth}
 ```
 <b>Find folder by full name</b>
 ```java
