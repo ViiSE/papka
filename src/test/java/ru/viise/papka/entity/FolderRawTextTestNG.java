@@ -92,6 +92,7 @@ public class FolderRawTextTestNG {
     @Test(priority = 6)
     public void files() {
         Folder<String> folders = new FolderRawText(
+                "/root124",
                 "/root1.png",
                 "/root2.png",
                 "/root3.png");
@@ -101,6 +102,7 @@ public class FolderRawTextTestNG {
         assertEquals(
                 files,
                 new ArrayList<String>() {{
+                    add("root124");
                     add("root1.png");
                     add("root2.png");
                     add("root3.png");}});
