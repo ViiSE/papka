@@ -177,7 +177,7 @@ If using <code>Filter</code>:
 ```java
 Filter<List<String>> filter = new FilterFilenamesRaw(
                 new FindUniqueByList<>(),
-                root);
+                files);
 List<String> uqFiles = filter.apply(); // return empty List
 ```
 Also <code>Filter</code> can be used for folders: 
