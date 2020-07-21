@@ -20,7 +20,7 @@ You have a raw filename list:
 
 You can use <code>Folder</code> interface:
 ```java
- Folder<String> root = new FolderRawText<>(
+ Folder<String> root = new FolderRawText(
     "/root1.png",
     "/root2.png",
     "/root3.png",
@@ -144,7 +144,7 @@ Search is carried out through the <code>Find</code> interface.
 <b>Find folders</b>
 ```java
  FindFolders<String, String> find = new FindFoldersByRegex<>(root);
- List<Folder<String>> folders = find.answer("bch") // {bch}
+ List<Folder<String>> folders = find.answer("^b.*$) // {bch, bth}
 ```
 <b>Find folder by full name</b>
 ```java
@@ -177,7 +177,7 @@ If using <code>Filter</code>:
 ```java
 Filter<List<String>> filter = new FilterFilenamesRaw(
                 new FindUniqueByList<>(),
-                root);
+                files);
 List<String> uqFiles = filter.apply(); // return empty List
 ```
 Also <code>Filter</code> can be used for folders: 
