@@ -6,16 +6,14 @@ import ru.viise.papka.entity.Folder;
 import ru.viise.papka.entity.FolderPure;
 import ru.viise.papka.entity.NameFolderRoot;
 import ru.viise.papka.find.FindByStartWith;
-import ru.viise.papka.find.FindDuplicatesByList;
 import ru.viise.papka.find.FindFilesByFolderNameRegex;
-import ru.viise.papka.find.FindUniqueByList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class FilterFilenamesTestNG {
+public class FilterFilesTestNG {
 
     private Folder<String> folder;
 
@@ -54,7 +52,7 @@ public class FilterFilenamesTestNG {
 
     @Test
     public void apply_withoutException() {
-        Filter<List<String>> filter = new FilterFilenames<>(
+        Filter<List<String>> filter = new FilterFiles<>(
                 new FindByStartWith<>(
                         new FindFilesByFolderNameRegex<>(folder, false)),
                 "child2");
@@ -71,7 +69,7 @@ public class FilterFilenamesTestNG {
 
     @Test
     public void apply_tryCallException() {
-        Filter<List<String>> filter = new FilterFilenames<>(
+        Filter<List<String>> filter = new FilterFiles<>(
                 new FindByStartWith<>(
                         new FindFilesByFolderNameRegex<>(folder)),
                 "music");

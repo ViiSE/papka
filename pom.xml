@@ -8,7 +8,6 @@
     <artifactId>Papka</artifactId>
     <version>1.0-alpha</version>
 
-
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>

@@ -6,12 +6,12 @@ import ru.viise.papka.find.Find;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilterFilenamesRaw implements Filter<List<String>> {
+public class FilterFilesRaw implements Filter<List<String>> {
 
     private final Find<List<String>, List<String>> find;
     private final List<String> rawFiles;
 
-    public FilterFilenamesRaw(Find<List<String>, List<String>> find, List<String> rawFiles) {
+    public FilterFilesRaw(Find<List<String>, List<String>> find, List<String> rawFiles) {
         this.find = find;
         this.rawFiles = rawFiles;
     }

@@ -24,7 +24,7 @@ public class NamePureTestNG {
 
     @Test
     public void shortNameBadSymbols() {
-        String badName = "/music/opus/op*?\"<>|+\u0000us111.mp3";
+        String badName = "/music/op*?\"<>|+\u0000us/opus111.mp3";
         Name name = new NamePure(badName);
         assertEquals(name.shortName(), shortName);
         assertEquals(name.fullName(), fullName);
