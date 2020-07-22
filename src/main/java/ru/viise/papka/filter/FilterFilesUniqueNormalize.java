@@ -3,11 +3,11 @@ package ru.viise.papka.filter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilterFilesDuplicatesNormalize<T> implements Filter<List<T>> {
+public class FilterFilesUniqueNormalize<T> implements Filter<List<T>> {
 
     private final List<T> rawFiles;
 
-    public FilterFilesDuplicatesNormalize(List<T> rawFiles) {
+    public FilterFilesUniqueNormalize(List<T> rawFiles) {
         this.rawFiles = rawFiles;
     }
 

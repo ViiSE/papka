@@ -2,14 +2,13 @@ package ru.viise.papka.filter;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ru.viise.papka.find.FindDuplicatesByList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class FilterFilesDuplicatesNormalizeTestNG {
+public class FilterFilesUniqueNormalizeTestNG {
 
     private List<String> rawFiles;
     private List<String> expected;
@@ -36,7 +35,7 @@ public class FilterFilesDuplicatesNormalizeTestNG {
 
     @Test
     public void apply() {
-        Filter<List<String>> filter = new FilterFilesDuplicatesNormalize<>(rawFiles);
+        Filter<List<String>> filter = new FilterFilesUniqueNormalize<>(rawFiles);
         List<String> actual = filter.apply();
 
         assertEquals(actual, expected);
