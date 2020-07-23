@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-public class FindByExtWithTestNG {
+public class FindByExtTestNG {
 
     private Find<List<String>, String> find;
 
@@ -33,7 +33,7 @@ public class FindByExtWithTestNG {
                 rootFiles);
 
         find = new FindByExt<>(
-                new FindFilesByRegex(root,false));
+                new FindFilesByRegex(root, false));
     }
 
     @Test
