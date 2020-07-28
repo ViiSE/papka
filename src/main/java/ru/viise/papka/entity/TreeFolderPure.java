@@ -2,6 +2,8 @@ package ru.viise.papka.entity;
 
 import ru.viise.papka.exception.NotFoundException;
 import ru.viise.papka.find.FindFolderChildByShortName;
+import ru.viise.papka.system.Separator;
+import ru.viise.papka.system.SeparatorUnix;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +14,25 @@ public class TreeFolderPure<T> implements TreeFolder<T> {
 
     private final FoldersFile<String, String> foldersFile;
     private final PreparedFolders<Map<String, Folder<T>>> prepFolders;
+    private final Separator separator;
 
     public TreeFolderPure(PreparedFolders<Map<String, Folder<T>>> prepFolders) {
-        this.foldersFile = new FoldersFileName();
-        this.prepFolders = prepFolders;
+        this(new FoldersFileName(), prepFolders);
     }
 
     public TreeFolderPure(
             FoldersFile<String, String> foldersFile,
             PreparedFolders<Map<String, Folder<T>>> prepFolders) {
+        this(foldersFile, prepFolders, new SeparatorUnix());
+    }
+
+    public TreeFolderPure(
+            FoldersFile<String, String> foldersFile,
+            PreparedFolders<Map<String, Folder<T>>> prepFolders,
+            Separator separator) {
         this.foldersFile = foldersFile;
         this.prepFolders = prepFolders;
+        this.separator = separator;
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +55,8 @@ public class TreeFolderPure<T> implements TreeFolder<T> {
             prevFolder.set(folder);
         });
 
+        folderMap.clear();
+
         return root;
     }
 
@@ -54,17 +66,19 @@ public class TreeFolderPure<T> implements TreeFolder<T> {
         try {
             root = new FindFolderChildByShortName<>(rootChildren).answer(foldersName.get(0));
         } catch (NotFoundException ex) {
-            root = new FolderPure<>("/" + foldersName.get(0), new ArrayList<>());
+            String rootName = "/" + getName(foldersName.get(0));
+            root = new FolderPure<>(new NamePure(rootName, separator), new ArrayList<>());
+            rootChildren.add(root);
         }
 
         String fullName = root.fullName();
         for (int i = 1; i < foldersName.size(); i++) {
             String shortName = foldersName.get(i);
-            fullName += "/" + foldersName.get(i);
+            fullName += getName(foldersName.get(i));
             try {
                 root = new FindFolderChildByShortName<>(root.children()).answer(shortName);
             } catch (NotFoundException ex) {
-                Folder<T> child = new FolderPure<>(fullName, new ArrayList<>());
+                Folder<T> child = new FolderPure<>(new NamePure(fullName, separator), new ArrayList<>());
                 root.children().add(child);
                 root = child;
             }
@@ -72,5 +86,9 @@ public class TreeFolderPure<T> implements TreeFolder<T> {
 
         // Last folder is target child
         root.files().addAll(folder.files());
+    }
+
+    private String getName(String rawName) {
+        return separator.pure() + rawName;
     }
 }

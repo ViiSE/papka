@@ -9,11 +9,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.testng.Assert.*;
 
-public class FolderRawTextTestNG {
+public class FolderTextTestNG {
 
     @Test(priority = 1)
     public void ctorArray() {
-        new FolderRawText(
+        new FolderText(
                 "/root1.png",
                 "/music/a.mp3",
                  "/music/opus/b.mp3",
@@ -29,7 +29,7 @@ public class FolderRawTextTestNG {
 
     @Test(priority = 2)
     public void ctorList() {
-        new FolderRawText(
+        new FolderText(
                 new ArrayList<String>() {{
                 add("/root1.png");
                 add("/music/a.mp3");
@@ -46,7 +46,7 @@ public class FolderRawTextTestNG {
 
     @Test(priority = 3)
     public void ctorNameAndArray() {
-        new FolderRawText(
+        new FolderText(
                 new NameFolderRoot(),
                 "/root1.png",
                 "/music/a.mp3",
@@ -58,12 +58,13 @@ public class FolderRawTextTestNG {
                 "/opes/b.png",
                 "/music/opus/ar.mp3",
                 "/root2.png",
-                "/root3.png");
+                "/root3.png")
+                .files();
     }
 
     @Test(priority = 4)
     public void ctorNameAndList() {
-        new FolderRawText(
+        new FolderText(
                 new NameFolderRoot(),
                 new ArrayList<String>() {{
                     add("/root1.png");
@@ -91,7 +92,7 @@ public class FolderRawTextTestNG {
 
     @Test(priority = 6)
     public void files() {
-        Folder<String> folders = new FolderRawText(
+        Folder<String> folders = new FolderText(
                 "/root124",
                 "/root1.png",
                 "/root2.png",
@@ -102,8 +103,8 @@ public class FolderRawTextTestNG {
         assertEquals(
                 files,
                 new ArrayList<String>() {{
-                    add("root124");
                     add("root1.png");
+                    add("root124");
                     add("root2.png");
                     add("root3.png");}});
     }
@@ -113,7 +114,7 @@ public class FolderRawTextTestNG {
         String fullName = testFolder().fullName();
 
         assertNotNull(fullName);
-        assertEquals(fullName, "/music");
+        assertEquals(fullName, "/");
     }
 
     @Test(priority = 8)
@@ -123,6 +124,7 @@ public class FolderRawTextTestNG {
             add("root2.png");
             add("root3.png");
         }};
+        rootFiles.sort(String::compareTo);
 
         List<String> musicFiles = new ArrayList<String>() {{
             add("a.mp3");
@@ -132,6 +134,7 @@ public class FolderRawTextTestNG {
             add("b.mp3");
             add("ar.mp3");
         }};
+        musicOpusFiles.sort(String::compareTo);
 
         List<String> musicOpusVarFiles = new ArrayList<String>() {{
             add("var.mp3");
@@ -154,7 +157,7 @@ public class FolderRawTextTestNG {
         files.add(musicOpesFiles);
 
         AtomicInteger i = new AtomicInteger();
-        Folder<String> root = new FolderRawText(
+        Folder<String> root = new FolderText(
                 "/root1.png",
                 "/music/a.mp3",
                 "/music/opus/b.mp3",
@@ -176,33 +179,45 @@ public class FolderRawTextTestNG {
     public void shortName() {
         String shortName = testFolder().shortName();
         assertNotNull(shortName);
-        assertEquals(shortName, "music");
+        assertEquals(shortName, "/");
     }
 
     @Test(priority = 10)
     public void eq() {
-        Folder<String> f1 = testFolder();
-        Folder<String> f2 = new FolderPure<>("/music");
+        Folder<String> actual = testFolder();
+        Folder<String> expected = new FolderText(
+                "/root124",
+                "/root1.png",
+                "/root2.png",
+                "/root3.png");
 
-        f1.travel(folder -> assertEquals(folder, f2));
+        assertEquals(expected, actual);
     }
 
     @Test(priority = 11)
     public void eq_wrongType() {
-        Folder<String> f2 = new FolderPure<>("/music");
-        String fileFake = "/music";
+        Folder<String> actual = testFolder();
+        String folderFake = "/music";
 
-        assertNotEquals(f2, fileFake);
+        assertNotEquals(folderFake, actual);
+    }
+
+    @Test(priority = 12)
+    public void eq_no() {
+        Folder<String> actual = testFolder();
+        Folder<String> expected = new FolderText(
+                "/root1.png",
+                "/root2.png",
+                "/root3.png");
+        assertNotEquals(expected, actual);
     }
 
     private Folder<String> testFolder() {
-        Folder<String> folder = new FolderPure<>(
-                "/",
-                new ArrayList<>(),
-                new ArrayList<Folder<String>>() {{
-                    add(new FolderPure<>("/music", new ArrayList<>(), new ArrayList<>()));
-                }});
-        List<Folder<String>> children = folder.children();
-        return children.get(0);
+        return new FolderText(
+                "/root124",
+                "/root1.png",
+                "/root2.png",
+                "/root3.png");
+
     }
 }

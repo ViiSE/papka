@@ -165,8 +165,58 @@ public class FolderPureTestNG {
     }
 
     @Test
-    public void equals_wrongClass() {
+    public void eq() {
+        List<String> rootFiles = new ArrayList<String>() {{
+            add("file1.png");
+            add("file2.png");
+        }};
+
+        Folder<String> child = new FolderPure<>(
+                "/music",
+                new ArrayList<String>() {{
+                    add("musicA.mp3"); }});
+
+        Folder<String> expected = new FolderPure<>(
+                new NameFolderRoot(),
+                rootFiles,
+                new ArrayList<Folder<String>>() {{
+                    add(child);
+                }});
+
+        assertEquals(expected, root);
+    }
+
+    @Test
+    public void eq_wrongType() {
+        Folder<String> actual = new FolderPure<>(
+                new NameFolderRoot(),
+                new ArrayList<>()
+        );
+
         String fileFake = "file.png";
-        assertNotEquals(root, fileFake);
+        assertNotEquals(fileFake, actual);
+    }
+
+    @Test
+    public void eq_no() {
+        List<String> rootFiles = new ArrayList<String>() {{
+            add("file1.png");
+            add("file2.png");
+            add("file3.png");
+        }};
+
+        Folder<String> child = new FolderPure<>(
+                "/music",
+                new ArrayList<String>() {{
+                    add("musicA.mp3"); }});
+
+        Folder<String> expected = new FolderPure<>(
+                new NameFolderRoot(),
+                rootFiles,
+                new ArrayList<Folder<String>>() {{
+                    add(child);
+                }});
+
+        assertNotEquals(expected, root);
     }
 }

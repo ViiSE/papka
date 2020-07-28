@@ -14,6 +14,7 @@ public class FindByStartWith<T> implements Find<T, String> {
 
     @Override
     public T answer(String startWith) throws NotFoundException {
+        startWith = startWith.replace("\\", "\\\\");
         return find.answer("^" + startWith + ".*$");
     }
 }

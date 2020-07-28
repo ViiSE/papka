@@ -7,7 +7,7 @@ public class FoldersFileName implements FoldersFile<String, String> {
 
     @Override
     public List<String> folders(String fullFilename) {
-        fullFilename = fullFilename.replaceAll("//", "/");
+        fullFilename = fullFilename.replace("//", "/");
         String[] foldersName = fullFilename.split("/");
 
         int length = foldersName.length - 1;

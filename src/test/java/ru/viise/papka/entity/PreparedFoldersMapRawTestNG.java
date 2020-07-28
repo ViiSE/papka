@@ -2,6 +2,7 @@ package ru.viise.papka.entity;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.viise.papka.system.SeparatorWin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class PreparedFoldersMapRawTestNG {
         files.add(folder2);
 
         List<String> rawFiles = new ArrayList<>();
-        rawFiles.add("/root1.txt");
+        rawFiles.add("root1.txt");
         rawFiles.add("/root2.txt");
         rawFiles.add("/root3.txt");
         rawFiles.add("/file1.txt");
@@ -72,5 +73,28 @@ public class PreparedFoldersMapRawTestNG {
         AtomicInteger i = new AtomicInteger();
         mapRaw.forEach((fullFolderName, prepFiles) ->
                 assertEquals(prepFiles, files.get(i.getAndIncrement())));
+    }
+
+    @Test
+    public void preparation_win() {
+        List<String> rawFiles = new ArrayList<>();
+        rawFiles.add("root1.txt");
+        rawFiles.add("C:\\root2.txt");
+        rawFiles.add("C:\\root3.txt");
+        rawFiles.add("C:\\file1.txt");
+        rawFiles.add("C:\\file2.txt");
+        rawFiles.add("C:\\folder1\\file1.txt");
+        rawFiles.add("C:\\folder1\\file2.txt");
+        rawFiles.add("C:\\folder2\\file1.txt");
+        rawFiles.sort(String::compareTo);
+
+        prepFolders = new PreparedFoldersMapRaw(new FoldersFileNameWin(new SeparatorWin()), new SeparatorWin(), rawFiles);
+
+        Map<String, List<String>> mapRaw = prepFolders.preparation();
+        AtomicInteger i = new AtomicInteger();
+        mapRaw.forEach((fullFolderName, prepFiles) -> {
+            if(!fullFolderName.equals("/"))
+                assertEquals(prepFiles, files.get(i.getAndIncrement()));
+        });
     }
 }

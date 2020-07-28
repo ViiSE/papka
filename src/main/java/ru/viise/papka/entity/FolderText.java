@@ -5,36 +5,36 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class FolderRawText implements Folder<String> {
+public class FolderText implements Folder<String> {
 
     private final Name name;
     private List<String> files;
-    private List<Folder<String>> children = new ArrayList<>();
+    private List<Folder<String>> children;
     private final TreeFolder<String> trFolder;
 
-    public FolderRawText(List<String> rawFiles) {
+    public FolderText(List<String> rawFiles) {
         this(new NameFolderRoot(), rawFiles);
     }
 
-    public FolderRawText(String... rawFiles) {
+    public FolderText(String... rawFiles) {
         this(new NameFolderRoot(), new TreeFolderPure<>(
                 new PreparedFoldersMapText(
                         new PreparedFoldersMapRaw(new ArrayList<>(Arrays.asList(rawFiles))))
         ));
     }
 
-    public FolderRawText(Name name, String... rawFiles) {
+    public FolderText(Name name, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)));
     }
 
-    public FolderRawText(Name name, List<String> rawFiles) {
+    public FolderText(Name name, List<String> rawFiles) {
         this(name, new TreeFolderPure<>(
                 new PreparedFoldersMapText(
                         new PreparedFoldersMapRaw(rawFiles))
         ));
     }
 
-    public FolderRawText(Name name, TreeFolder<String> trFolder) {
+    public FolderText(Name name, TreeFolder<String> trFolder) {
         this.name = name;
         this.trFolder = trFolder;
     }
@@ -48,6 +48,7 @@ public class FolderRawText implements Folder<String> {
 
     private void init() {
         files = new ArrayList<>();
+        children = new ArrayList<>();
         Folder<String> prepRoot = trFolder.grow();
         this.files = prepRoot.files();
         this.children = prepRoot.children();
@@ -95,8 +96,8 @@ public class FolderRawText implements Folder<String> {
         }
 
         if(((Folder) folder).fullName().equals(this.fullName())) {
-            if(((Folder) folder).files().equals(this.files))
-                if(((Folder) folder).children().equals(this.children))
+            if(((Folder) folder).files().equals(files()))
+                if(((Folder) folder).children().equals(children()))
                 return true;
         }
 
