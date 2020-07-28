@@ -96,8 +96,14 @@ public class FindFolderByShortNameTestNG {
     }
 
     @Test(expectedExceptions = NotFoundException.class)
-    public void answer_notFound() throws NotFoundException {
+    public void answer_notFoundLast() throws NotFoundException {
         FindFolder<String, String> find = new FindFolderByShortName<>(root, true);
+        find.answer("/music");
+    }
+
+    @Test(expectedExceptions = NotFoundException.class)
+    public void answer_notFound() throws NotFoundException {
+        FindFolder<String, String> find = new FindFolderByShortName<>(root);
         find.answer("/music");
     }
 }
