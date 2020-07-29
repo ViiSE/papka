@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import ru.viise.papka.entity.Folder;
 import ru.viise.papka.exception.NotFoundException;
@@ -22,11 +22,11 @@ import ru.viise.papka.exception.NotFoundException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class FindFolderByFullName<T> implements FindFolder<T, String> {
+public class SearchFolderByFullName<T> implements SearchFolder<T, String> {
 
     private final Folder<T> folder;
 
-    public FindFolderByFullName(Folder<T> folder) {
+    public SearchFolderByFullName(Folder<T> folder) {
         this.folder = folder;
     }
 

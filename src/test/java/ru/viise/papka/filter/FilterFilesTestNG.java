@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 import ru.viise.papka.entity.Folder;
 import ru.viise.papka.entity.FolderPure;
 import ru.viise.papka.entity.NameFolderRoot;
-import ru.viise.papka.find.FindByStartWith;
-import ru.viise.papka.find.FindFilesByFolderNameRegex;
+import ru.viise.papka.search.SearchByStartWith;
+import ru.viise.papka.search.SearchFilesByFolderNameRegex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +53,8 @@ public class FilterFilesTestNG {
     @Test
     public void apply_withoutException() {
         Filter<List<String>> filter = new FilterFiles<>(
-                new FindByStartWith<>(
-                        new FindFilesByFolderNameRegex<>(folder, false)),
+                new SearchByStartWith<>(
+                        new SearchFilesByFolderNameRegex<>(folder, false)),
                 "child2");
         List<String> actual = filter.apply();
 
@@ -70,8 +70,8 @@ public class FilterFilesTestNG {
     @Test
     public void apply_tryCallException() {
         Filter<List<String>> filter = new FilterFiles<>(
-                new FindByStartWith<>(
-                        new FindFilesByFolderNameRegex<>(folder)),
+                new SearchByStartWith<>(
+                        new SearchFilesByFolderNameRegex<>(folder)),
                 "music");
 
         List<String> actual = filter.apply();

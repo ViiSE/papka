@@ -14,10 +14,21 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import ru.viise.papka.exception.NotFoundException;
 
-public interface Find<T, V> {
-    T answer(V query) throws NotFoundException;
+public class SearchByStartWith<T> implements Search<T, String> {
+
+    private final Search<T, String> search;
+
+    public SearchByStartWith(Search<T, String> search) {
+        this.search = search;
+    }
+
+    @Override
+    public T answer(String startWith) throws NotFoundException {
+        startWith = startWith.replace("\\", "\\\\");
+        return search.answer("^" + startWith + ".*$");
+    }
 }

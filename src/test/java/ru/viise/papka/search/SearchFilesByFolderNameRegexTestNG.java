@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-public class FindFilesByFolderNameRegexTestNG {
+public class SearchFilesByFolderNameRegexTestNG {
 
     private Folder<String> folder;
 
@@ -51,21 +51,21 @@ public class FindFilesByFolderNameRegexTestNG {
 
     @Test
     public void ctor_isFullNameAndFolder() {
-        new FindFilesByFolderNameRegex<>(
+        new SearchFilesByFolderNameRegex<>(
                 new FolderPure<>("folder"),
                 true);
     }
 
     @Test
     public void ctor_folder() {
-        new FindFilesByFolderNameRegex<>(
+        new SearchFilesByFolderNameRegex<>(
                 new FolderPure<>("folder"));
     }
 
     @Test
     public void answer_isFullName() throws NotFoundException {
-        Find<List<String>, String> find = new FindFilesByFolderNameRegex<>(folder);
-        List<String> actual = find.answer("^/child2.*$");
+        Search<List<String>, String> search = new SearchFilesByFolderNameRegex<>(folder);
+        List<String> actual = search.answer("^/child2.*$");
         assertNotNull(actual);
         assertFalse(actual.isEmpty());
 
@@ -78,10 +78,10 @@ public class FindFilesByFolderNameRegexTestNG {
 
     @Test
     public void answer_isShortName() throws NotFoundException {
-        Find<List<String>, String> find = new FindFilesByFolderNameRegex<>(
+        Search<List<String>, String> search = new SearchFilesByFolderNameRegex<>(
                 folder,
                 false);
-        List<String> actual = find.answer("^child2.*$");
+        List<String> actual = search.answer("^child2.*$");
         assertNotNull(actual);
         assertFalse(actual.isEmpty());
 
@@ -96,9 +96,9 @@ public class FindFilesByFolderNameRegexTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
-        Find<List<String>, String> find = new FindFilesByFolderNameRegex<>(
+        Search<List<String>, String> search = new SearchFilesByFolderNameRegex<>(
                 folder,
                 false);
-        find.answer("^chopin.*$");
+        search.answer("^chopin.*$");
     }
 }

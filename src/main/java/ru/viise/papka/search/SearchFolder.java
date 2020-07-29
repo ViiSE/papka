@@ -14,23 +14,11 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
+import ru.viise.papka.entity.Folder;
 import ru.viise.papka.exception.NotFoundException;
 
-import java.util.List;
-
-public class FindByStartWith<T> implements Find<T, String> {
-
-    private final Find<T, String> find;
-
-    public FindByStartWith(Find<T, String> find) {
-        this.find = find;
-    }
-
-    @Override
-    public T answer(String startWith) throws NotFoundException {
-        startWith = startWith.replace("\\", "\\\\");
-        return find.answer("^" + startWith + ".*$");
-    }
+public interface SearchFolder<T, V> extends Search<Folder<T>, V> {
+    Folder<T> answer(V query) throws NotFoundException;
 }

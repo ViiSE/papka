@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import ru.viise.papka.entity.Folder;
 import ru.viise.papka.exception.NotFoundException;
@@ -23,17 +23,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class FindFoldersByRegex<T> implements FindFolders<T, String> {
+public class SearchFoldersByRegex<T> implements SearchFolders<T, String> {
 
     private final Folder<T> folder;
     private final boolean isFullName;
 
-    public FindFoldersByRegex(Folder<T> folder, boolean isFullName) {
+    public SearchFoldersByRegex(Folder<T> folder, boolean isFullName) {
         this.folder = folder;
         this.isFullName = isFullName;
     }
 
-    public FindFoldersByRegex(Folder<T> folder) {
+    public SearchFoldersByRegex(Folder<T> folder) {
         this(folder, true);
     }
 

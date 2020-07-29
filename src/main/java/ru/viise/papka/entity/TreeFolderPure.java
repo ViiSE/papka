@@ -17,7 +17,7 @@
 package ru.viise.papka.entity;
 
 import ru.viise.papka.exception.NotFoundException;
-import ru.viise.papka.find.FindFolderChildByShortName;
+import ru.viise.papka.search.SearchFolderChildByShortName;
 import ru.viise.papka.system.Separator;
 import ru.viise.papka.system.SeparatorUnix;
 
@@ -80,7 +80,7 @@ public class TreeFolderPure<T> implements TreeFolder<T> {
         // First folder is root child
         Folder<T> root;
         try {
-            root = new FindFolderChildByShortName<>(rootChildren).answer(foldersName.get(0));
+            root = new SearchFolderChildByShortName<>(rootChildren).answer(foldersName.get(0));
         } catch (NotFoundException ex) {
             String rootName = "/" + getName(foldersName.get(0));
             root = new FolderPure<>(new NamePure(rootName, separator), new ArrayList<>());
@@ -92,7 +92,7 @@ public class TreeFolderPure<T> implements TreeFolder<T> {
             String shortName = foldersName.get(i);
             fullName += getName(foldersName.get(i));
             try {
-                root = new FindFolderChildByShortName<>(root.children()).answer(shortName);
+                root = new SearchFolderChildByShortName<>(root.children()).answer(shortName);
             } catch (NotFoundException ex) {
                 Folder<T> child = new FolderPure<>(new NamePure(fullName, separator), new ArrayList<>());
                 root.children().add(child);

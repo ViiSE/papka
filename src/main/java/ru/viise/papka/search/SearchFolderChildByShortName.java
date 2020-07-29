@@ -14,21 +14,28 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
+import ru.viise.papka.entity.Folder;
 import ru.viise.papka.exception.NotFoundException;
 
-public class FindByExt<T> implements Find<T, String> {
+import java.util.List;
 
-    private final Find<T, String> find;
+public class SearchFolderChildByShortName<T> implements SearchFolder<T, String> {
 
-    public FindByExt(Find<T, String> find) {
-        this.find = find;
+    private final List<Folder<T>> children;
+
+    public SearchFolderChildByShortName(List<Folder<T>> children) {
+        this.children = children;
     }
 
     @Override
-    public T answer(String ext) throws NotFoundException {
-        String extReg = ext.replaceAll("\\.", "\\\\.");
-        return find.answer("([^.]*)(" + extReg + "$)");
+    public Folder<T> answer(String shortName) throws NotFoundException {
+        for(Folder<T> child: children) {
+            if(child.shortName().equals(shortName))
+                return child;
+        }
+
+        throw new NotFoundException("Folder '" + shortName + "' not found in children list.");
     }
 }

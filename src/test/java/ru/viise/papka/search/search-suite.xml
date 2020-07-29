@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="FindSuite">
-    <test name="FindTest">
+<suite name="Search">
+    <test name="SearchTest">
         <packages>
-            <package name="ru.viise.papka.find"/>
+            <package name="ru.viise.papka.search"/>
         </packages>
     </test>
 </suite>

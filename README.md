@@ -125,36 +125,36 @@ Search is carried out through the <code>Find</code> interface.
 <br>
 <b>Find files</b>
 ```java
- Find<List<String>, String> find = new FindFilesByRegex(root);
- List<String> files = find.answer("a.mp3") // {a.mp3}
+ Find<List<String>, String> search = new FindFilesByRegex(root);
+ List<String> files = search.answer("a.mp3") // {a.mp3}
 ```
 <b>Find files by extension</b>
 ```java
- Find<List<String>, String> find = new FindByExt<>(
+ Find<List<String>, String> search = new FindByExt<>(
                                     new FindFilesByRegex(root));
- List<String> files = find.answer(".flac") // {13.flac}
+ List<String> files = search.answer(".flac") // {13.flac}
 ```
 <b>Find files by start with</b>
 ```java
- Find<List<String>, String> find = new FindByStartWith<>(
+ Find<List<String>, String> search = new FindByStartWith<>(
                                     new FindFilesByRegex(root));
- List<String> files = find.answer("1") // {1.mp3, 111.mp3, 13.flac}
+ List<String> files = search.answer("1") // {1.mp3, 111.mp3, 13.flac}
 ```
 
 <b>Find folders</b>
 ```java
- FindFolders<String, String> find = new FindFoldersByRegex<>(root);
- List<Folder<String>> folders = find.answer("^b.*$) // {bch, bth}
+ FindFolders<String, String> search = new FindFoldersByRegex<>(root);
+ List<Folder<String>> folders = search.answer("^b.*$) // {bch, bth}
 ```
 <b>Find folder by full name</b>
 ```java
- FindFolder<String, String> find = new FindFoldersByFullName<>(root);
- Folder<String> folder = find.answer("/music/opus/mzt") // mzt
+ FindFolder<String, String> search = new FindFoldersByFullName<>(root);
+ Folder<String> folder = search.answer("/music/opus/mzt") // mzt
 ```
 <b>Find folder by short name</b>
 ```java
- FindFolder<String, String> find = new FindFoldersByShortName<>(root);
- Folder<String> folder = find.answer("doc") // doc
+ FindFolder<String, String> search = new FindFoldersByShortName<>(root);
+ Folder<String> folder = search.answer("doc") // doc
 ```
 ### Filter
 The interface <code>Filter</code> provides filtering. It differs from <code>Find</code> in that it does not throws 
@@ -170,8 +170,8 @@ Suppose we have the following raw list of <code>files</code>:
 ```
 If using <code>Find</code>:
 ```java
-Find<List<String>, List<String>> find = new FindUniqueByList();
-List<String> uqFiles = find.answer(files); // throw NotFoundException
+Find<List<String>, List<String>> search = new FindUniqueByList();
+List<String> uqFiles = search.answer(files); // throw NotFoundException
 ```
 If using <code>Filter</code>:
 ```java

@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class FindFolderByShortNameTestNG {
+public class SearchFolderByShortNameTestNG {
 
     private Folder<String> root;
 
@@ -59,8 +59,8 @@ public class FindFolderByShortNameTestNG {
 
     @Test
     public void answer_found() throws NotFoundException {
-        FindFolder<String, String> find = new FindFolderByShortName<>(root);
-        Folder<String> actual = find.answer("child1");
+        SearchFolder<String, String> search = new SearchFolderByShortName<>(root);
+        Folder<String> actual = search.answer("child1");
 
         Folder<String> expected = new FolderPure<>(
                 "/child1",
@@ -74,16 +74,16 @@ public class FindFolderByShortNameTestNG {
 
     @Test
     public void answer_fastFind() throws NotFoundException {
-        FindFolder<String, String> find = new FindFolderByShortName<>(root);
-        Folder<String> actual = find.answer("/");
+        SearchFolder<String, String> search = new SearchFolderByShortName<>(root);
+        Folder<String> actual = search.answer("/");
 
         assertEquals(root, actual);
     }
 
     @Test
     public void answer_foundLast() throws NotFoundException {
-        FindFolder<String, String> find = new FindFolderByShortName<>(root, true);
-        Folder<String> actual = find.answer("child1");
+        SearchFolder<String, String> search = new SearchFolderByShortName<>(root, true);
+        Folder<String> actual = search.answer("child1");
 
         Folder<String> expected = new FolderPure<>(
                 "/child2/child1",
@@ -97,13 +97,13 @@ public class FindFolderByShortNameTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFoundLast() throws NotFoundException {
-        FindFolder<String, String> find = new FindFolderByShortName<>(root, true);
-        find.answer("/music");
+        SearchFolder<String, String> search = new SearchFolderByShortName<>(root, true);
+        search.answer("/music");
     }
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
-        FindFolder<String, String> find = new FindFolderByShortName<>(root);
-        find.answer("/music");
+        SearchFolder<String, String> search = new SearchFolderByShortName<>(root);
+        search.answer("/music");
     }
 }

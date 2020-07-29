@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class FindFoldersByRegexTestNG {
+public class SearchFoldersByRegexTestNG {
 
     private Folder<String> root;
 
@@ -59,9 +59,9 @@ public class FindFoldersByRegexTestNG {
 
     @Test
     public void answer_isFullName() throws NotFoundException {
-        FindFolders<String, String> find = new FindFoldersByRegex<>(root);
+        SearchFolders<String, String> search = new SearchFoldersByRegex<>(root);
 
-        List<Folder<String>> actual = find.answer("/music");
+        List<Folder<String>> actual = search.answer("/music");
 
         List<Folder<String>> expected = new ArrayList<>();
         expected.add(new FolderPure<>(
@@ -77,11 +77,11 @@ public class FindFoldersByRegexTestNG {
 
     @Test
     public void answer_isNotFullName() throws NotFoundException {
-        Find<List<Folder<String>>, String> find =
-                new FindByStartWith<>(
-                        new FindFoldersByRegex<>(root, false));
+        Search<List<Folder<String>>, String> search =
+                new SearchByStartWith<>(
+                        new SearchFoldersByRegex<>(root, false));
 
-        List<Folder<String>> actual = find.answer("child");
+        List<Folder<String>> actual = search.answer("child");
 
 
         List<Folder<String>> expected = new ArrayList<>();
@@ -120,7 +120,7 @@ public class FindFoldersByRegexTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
-        FindFolders<String, String> find = new FindFoldersByRegex<>(root);
-        find.answer("/music/opus");
+        SearchFolders<String, String> search = new SearchFoldersByRegex<>(root);
+        search.answer("/music/opus");
     }
 }

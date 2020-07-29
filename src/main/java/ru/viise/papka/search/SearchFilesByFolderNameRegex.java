@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import ru.viise.papka.entity.Folder;
 import ru.viise.papka.exception.NotFoundException;
@@ -23,29 +23,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class FindFilesByRegex implements Find<List<String>, String> {
+public class SearchFilesByFolderNameRegex<T> implements Search<List<T>, String> {
 
-    private final boolean includeChildren;
-    private final Folder<String> folder;
+    private final Folder<T> folder;
+    private final boolean isFullName;
 
-    public FindFilesByRegex(Folder<String> folder, boolean includeChildren) {
+    public SearchFilesByFolderNameRegex(
+            Folder<T> folder,
+            boolean isFullName) {
         this.folder = folder;
-        this.includeChildren = includeChildren;
+        this.isFullName = isFullName;
     }
 
-    public FindFilesByRegex(Folder<String> folder) {
-        this(folder, false);
+    public SearchFilesByFolderNameRegex(Folder<T> folder) {
+        this(folder, true);
     }
 
     @Override
-    public List<String> answer(String regex) throws NotFoundException {
-        List<String> files = new ArrayList<>();
+    public List<T> answer(String regex) throws NotFoundException {
+        List<T> files = new ArrayList<>();
         Pattern pattern = Pattern.compile(regex);
 
-        if (includeChildren)
-            folder.travel(folder -> files.addAll(find(pattern, folder)));
-        else
-            files.addAll(find(pattern, folder));
+        folder.travel(folder -> files.addAll(findFolder(pattern, folder)));
 
         if (files.isEmpty())
             throw new NotFoundException("Folder matches regex '" + regex + "' not contains files.");
@@ -53,15 +52,16 @@ public class FindFilesByRegex implements Find<List<String>, String> {
             return files;
     }
 
-    private List<String> find(Pattern pattern, Folder<String> folder) {
-        List<String> files = new ArrayList<>();
+    private List<T> findFolder(Pattern pattern, Folder<T> folder) {
+        if (isFullName)
+            return matchesName(pattern, folder, folder.fullName());
+        else
+            return matchesName(pattern, folder, folder.shortName());
+    }
 
-        for(String file: folder.files()) {
-            if(pattern.matcher(file).matches()) {
-                files.add(file);
-            }
-        }
-
-        return files;
+    private List<T> matchesName(Pattern pattern, Folder<T> folder, String name) {
+        if (pattern.matcher(name).matches())
+            return folder.files();
+        return new ArrayList<>();
     }
 }

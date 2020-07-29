@@ -3,8 +3,8 @@ package ru.viise.papka.entity;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.viise.papka.exception.NotFoundException;
-import ru.viise.papka.find.FindByStartWith;
-import ru.viise.papka.find.FindFoldersByRegex;
+import ru.viise.papka.search.SearchByStartWith;
+import ru.viise.papka.search.SearchFoldersByRegex;
 import ru.viise.papka.system.*;
 
 import java.io.File;
@@ -153,7 +153,7 @@ public class FolderFileWinTestNG {
         root.files();
 
         AtomicInteger i = new AtomicInteger();
-        Folder<File> actualF = new FindByStartWith<>(new FindFoldersByRegex<>(root))
+        Folder<File> actualF = new SearchByStartWith<>(new SearchFoldersByRegex<>(root))
                 .answer("/\\" + "C:" + exDir.name().substring(0, exDir.name().length() - 1))
                 .get(0);
         List<File> actual = actualF.files();
@@ -196,7 +196,7 @@ public class FolderFileWinTestNG {
         expected.add(new File(exDirWin.name() + "music" + sepWin.pure() + "opus" + sepWin.pure() + "o1"));
 
         AtomicInteger i = new AtomicInteger();
-        Folder<File> actualF = new FindByStartWith<>(new FindFoldersByRegex<>(root))
+        Folder<File> actualF = new SearchByStartWith<>(new SearchFoldersByRegex<>(root))
                 .answer("/" + sepWin.pure() + "C:" + exDirWin.name().substring(0, exDirWin.name().length() - 1))
                 .get(0);
         List<File> actual = actualF.files();

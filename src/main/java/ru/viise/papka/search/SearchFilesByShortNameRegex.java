@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import ru.viise.papka.entity.Folder;
 import ru.viise.papka.exception.NotFoundException;
@@ -24,17 +24,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class FindFilesByFullNameRegex implements Find<List<File>, String> {
+public class SearchFilesByShortNameRegex implements Search<List<File>, String> {
 
     private final boolean includeChildren;
     private final Folder<File> folder;
 
-    public FindFilesByFullNameRegex(Folder<File> folder, boolean includeChildren) {
+    public SearchFilesByShortNameRegex(Folder<File> folder, boolean includeChildren) {
         this.folder = folder;
         this.includeChildren = includeChildren;
     }
 
-    public FindFilesByFullNameRegex(Folder<File> folder) {
+    public SearchFilesByShortNameRegex(Folder<File> folder) {
         this(folder, false);
     }
 
@@ -44,9 +44,9 @@ public class FindFilesByFullNameRegex implements Find<List<File>, String> {
         Pattern pattern = Pattern.compile(regex);
 
         if (includeChildren)
-            folder.travel(folder -> files.addAll(findByAbsolutePath(pattern, folder)));
+            folder.travel(folder -> files.addAll(findByShort(pattern, folder)));
         else
-            files.addAll(findByAbsolutePath(pattern, folder));
+            files.addAll(findByShort(pattern, folder));
 
         if (files.isEmpty())
             throw new NotFoundException("Folder matches regex '" + regex + "' not contains files.");
@@ -54,13 +54,11 @@ public class FindFilesByFullNameRegex implements Find<List<File>, String> {
             return files;
     }
 
-    private List<File> findByAbsolutePath(Pattern pattern, Folder<File> folder) {
+    private List<File> findByShort(Pattern pattern, Folder<File> folder) {
         List<File> files = new ArrayList<>();
 
         for(File file: folder.files()) {
-            String absolutePath = file.getAbsolutePath();
-            absolutePath = absolutePath.replace("\\", "\\\\");
-            if(pattern.matcher(absolutePath).matches()) {
+            if(pattern.matcher(file.getName()).matches()) {
                 files.add(file);
             }
         }

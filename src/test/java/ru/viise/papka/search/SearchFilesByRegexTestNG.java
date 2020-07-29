@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -10,11 +10,10 @@ import ru.viise.papka.exception.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
-public class FindFolderByFullNameTestNG {
+public class SearchFilesByRegexTestNG {
 
-    private FindFolder<String, String> find;
     private Folder<String> root;
 
     @BeforeClass
@@ -45,36 +44,51 @@ public class FindFolderByFullNameTestNG {
                         child1Files),
                 new FolderPure<>(
                         "/child2",
-                        child2Files,
-                        new FolderPure<>(
-                                "/child2/child21",
-                                child21Files)));
-        find = new FindFolderByFullName<>(root);
+                        child2Files),
+                new FolderPure<>(
+                        "/child21",
+                        child21Files));
     }
 
     @Test
-    public void answer_found() throws NotFoundException {
-        Folder<String> actual = find.answer("/child2/child21");
+    public void answer_excludeChildren() throws NotFoundException {
+        Search<List<String>, String> search = new SearchFilesByRegex(root);
 
-        Folder<String> expected = new FolderPure<>(
-                "/child2/child21",
-                new ArrayList<String>() {{
-                        add("child21.txt");
-                        add("child21.png");
-                    }});
+        List<String> actual = search.answer("^child.*$");
+        assertNotNull(actual);
+        assertFalse(actual.isEmpty());
+
+        List<String> expected = new ArrayList<>();
+        expected.add("childRoot1.pdf");
+        expected.add("childRoot2.pdf");
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void answer_fastFound() throws NotFoundException {
-        Folder<String> actual = find.answer("/");
+    public void answer_includeChildren() throws NotFoundException {
+        Search<List<String>, String> search = new SearchFilesByRegex(root, true);
 
-        assertEquals(root, actual);
+        List<String> actual = search.answer("^child.*$");
+        assertNotNull(actual);
+        assertFalse(actual.isEmpty());
+
+        List<String> expected = new ArrayList<>();
+        expected.add("childRoot1.pdf");
+        expected.add("childRoot2.pdf");
+        expected.add("child1.txt");
+        expected.add("child1.png");
+        expected.add("child2.txt");
+        expected.add("child2.png");
+        expected.add("child21.txt");
+        expected.add("child21.png");
+
+        assertEquals(expected, actual);
     }
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
-        find.answer("/music");
+        Search<List<String>, String> search = new SearchFilesByRegex(root, true);
+        search.answer("opus");
     }
 }

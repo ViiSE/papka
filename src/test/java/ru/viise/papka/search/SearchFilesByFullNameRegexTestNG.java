@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class FindFilesByShortNameRegexTestNG {
+public class SearchFilesByFullNameRegexTestNG {
 
     private Folder<File> root;
     private Separator separator;
@@ -40,8 +40,8 @@ public class FindFilesByShortNameRegexTestNG {
     @Test
     public void answer() throws NotFoundException {
         Folder<File> root = new FolderFile("root1.txt");
-        Find<List<File>, String> find = new FindFilesByShortNameRegex(root);
-        List<File> files = find.answer("root1.txt");
+        Search<List<File>, String> search = new SearchFilesByFullNameRegex(root);
+        List<File> files = search.answer("/root1.txt");
         File actual = files.get(0);
         File expected = new File("/root1.txt");
 
@@ -51,14 +51,14 @@ public class FindFilesByShortNameRegexTestNG {
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
         Folder<File> root = new FolderFile("root1.txt");
-        Find<List<File>, String> find = new FindFilesByShortNameRegex(root);
-        find.answer("root3.txt");
+        Search<List<File>, String> search = new SearchFilesByFullNameRegex(root);
+        search.answer("root3.txt");
     }
 
     @Test
     public void answer_includeChildren() throws NotFoundException {
-        Find<List<File>, String> find = new FindFilesByShortNameRegex(root, true);
-        List<File> files = find.answer("audio1.mp3");
+        Search<List<File>, String> search = new SearchFilesByFullNameRegex(root, true);
+        List<File> files = search.answer(exDir.name() + "music" + separator.pure() + "audio1.mp3");
         File actual = files.get(0);
         File expected = new File(exDir.name() + "music" + separator.pure() + "audio1.mp3");
         assertEquals(expected, actual);
@@ -66,7 +66,7 @@ public class FindFilesByShortNameRegexTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_includeChildrenNotFound() throws NotFoundException {
-        Find<List<File>, String> find = new FindFilesByShortNameRegex(root, true);
-        find.answer("audio134.mp3");
+        Search<List<File>, String> search = new SearchFilesByFullNameRegex(root, true);
+        search.answer(exDir.name() + "music2" + separator.pure() + "audio1.mp3");
     }
 }

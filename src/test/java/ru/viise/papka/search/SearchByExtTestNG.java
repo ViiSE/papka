@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,9 +12,9 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-public class FindByExtTestNG {
+public class SearchByExtTestNG {
 
-    private Find<List<String>, String> find;
+    private Search<List<String>, String> search;
 
     @BeforeClass
     public void beforeClass() {
@@ -32,13 +32,13 @@ public class FindByExtTestNG {
                 new NameFolderRoot(),
                 rootFiles);
 
-        find = new FindByExt<>(
-                new FindFilesByRegex(root, false));
+        search = new SearchByExt<>(
+                new SearchFilesByRegex(root, false));
     }
 
     @Test
     public void answer() throws NotFoundException {
-        List<String> actual = find.answer(".txt");
+        List<String> actual = search.answer(".txt");
         assertNotNull(actual);
         assertFalse(actual.isEmpty());
 
@@ -52,7 +52,7 @@ public class FindByExtTestNG {
 
     @Test
     public void answer_multipleExt() throws NotFoundException {
-        List<String> actual = find.answer(".pdf|.png");
+        List<String> actual = search.answer(".pdf|.png");
         assertNotNull(actual);
         assertFalse(actual.isEmpty());
 
@@ -69,6 +69,6 @@ public class FindByExtTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
-        find.answer(".jpeg");
+        search.answer(".jpeg");
     }
 }

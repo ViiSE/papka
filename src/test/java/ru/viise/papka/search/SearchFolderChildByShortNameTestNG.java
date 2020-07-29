@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class FindFolderChildByShortNameTestNG {
+public class SearchFolderChildByShortNameTestNG {
 
     private Folder<String> root;
 
@@ -45,8 +45,8 @@ public class FindFolderChildByShortNameTestNG {
 
     @Test
     public void answer_found() throws NotFoundException {
-        FindFolder<String, String> find = new FindFolderChildByShortName<>(root.children());
-        Folder<String> actual = find.answer("child2");
+        SearchFolder<String, String> search = new SearchFolderChildByShortName<>(root.children());
+        Folder<String> actual = search.answer("child2");
 
         Folder<String> expected = new FolderPure<>(
                 "/child2",
@@ -60,7 +60,7 @@ public class FindFolderChildByShortNameTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
-        FindFolder<String, String> find = new FindFolderChildByShortName<>(root.children());
-        find.answer("music");
+        SearchFolder<String, String> search = new SearchFolderChildByShortName<>(root.children());
+        search.answer("music");
     }
 }

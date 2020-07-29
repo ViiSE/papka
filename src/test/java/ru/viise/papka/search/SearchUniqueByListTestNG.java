@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -9,17 +9,17 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class FindDuplicatesByListTestNG {
+public class SearchUniqueByListTestNG {
 
-    private Find<List<String>, List<String>> find;
+    private Search<List<String>, List<String>> search;
 
     @BeforeClass
     public void beforeClass() {
-        find = new FindDuplicatesByList<>();
+        search = new SearchUniqueByList<>();
     }
 
     @Test
-    public void answer_withDuplicates() throws NotFoundException {
+    public void answer_withUnique() throws NotFoundException {
         List<String> list = new ArrayList<String>() {{
             add("/music/opus/opus111.mp3");
             add("/music/opus/opus109.mp3");
@@ -27,20 +27,20 @@ public class FindDuplicatesByListTestNG {
         }};
 
         List<String> expected = new ArrayList<String>() {{
-            add("/music/opus/opus111.mp3");
+            add("/music/opus/opus109.mp3");
         }};
-        List<String> actual = find.answer(list);
+        List<String> actual = search.answer(list);
 
         assertEquals(expected, actual);
     }
 
     @Test(expectedExceptions = NotFoundException.class)
-    public void answer_noDuplicates() throws NotFoundException {
+    public void answer_noUnique() throws NotFoundException {
         List<String> list = new ArrayList<String>() {{
             add("/music/opus/opus111.mp3");
-            add("/music/opus/opus109.mp3");
+            add("/music/opus/opus111.mp3");
         }};
 
-         find.answer(list);
+        search.answer(list);
     }
 }

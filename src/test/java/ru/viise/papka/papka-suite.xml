@@ -6,7 +6,7 @@
     <suite-files>
         <suite-file path="entity/entity-suite.xml"/>
         <suite-file path="filter/filter-suite.xml"/>
-        <suite-file path="find/find-suite.xml"/>
+        <suite-file path="search/search-suite.xml"/>
         <suite-file path="system/system-suite.xml"/>
     </suite-files>
 

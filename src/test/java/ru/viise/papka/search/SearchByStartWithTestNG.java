@@ -1,4 +1,4 @@
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,9 +12,9 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-public class FindByStartWithTestNG {
+public class SearchByStartWithTestNG {
 
-    private Find<List<String>, String> find;
+    private Search<List<String>, String> search;
 
     @BeforeClass
     public void beforeClass() {
@@ -48,15 +48,15 @@ public class FindByStartWithTestNG {
                                 child2_1))
         );
 
-        Find<List<String>, String> findFolder = new FindFilesByFolderNameRegex<>(
+        Search<List<String>, String> searchFolder = new SearchFilesByFolderNameRegex<>(
                 folder,
                 false);
-        find = new FindByStartWith<>(findFolder);
+        search = new SearchByStartWith<>(searchFolder);
     }
 
     @Test
     public void answer() throws NotFoundException {
-        List<String> actual = find.answer("child2");
+        List<String> actual = search.answer("child2");
         assertNotNull(actual);
         assertFalse(actual.isEmpty());
 
@@ -71,6 +71,6 @@ public class FindByStartWithTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
-        find.answer("chopin");
+        search.answer("chopin");
     }
 }

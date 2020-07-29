@@ -14,13 +14,26 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.find;
+package ru.viise.papka.search;
 
-import ru.viise.papka.entity.Folder;
 import ru.viise.papka.exception.NotFoundException;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public interface FindFolders<T, V> extends Find<List<Folder<T>>, V> {
-    List<Folder<T>> answer(V query) throws NotFoundException;
+public class SearchUniqueByList<T> implements Search<List<T>, List<T>> {
+
+    @Override
+    public List<T> answer(List<T> rawList) throws NotFoundException {
+        List<T> unique = rawList.stream()
+                .filter(e -> Collections.frequency(rawList, e) == 1)
+                .distinct()
+                .collect(Collectors.toList());
+
+        if(unique.isEmpty())
+            throw new NotFoundException("Unique values not found");
+
+        return unique;
+    }
 }

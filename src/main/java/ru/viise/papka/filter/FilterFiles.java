@@ -17,25 +17,25 @@
 package ru.viise.papka.filter;
 
 import ru.viise.papka.exception.NotFoundException;
-import ru.viise.papka.find.Find;
+import ru.viise.papka.search.Search;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FilterFiles<T> implements Filter<List<T>> {
 
-    private final Find<List<T>, String> find;
+    private final Search<List<T>, String> search;
     private final String regex;
 
-    public FilterFiles(Find<List<T>, String> find, String regex) {
-        this.find = find;
+    public FilterFiles(Search<List<T>, String> search, String regex) {
+        this.search = search;
         this.regex = regex;
     }
 
     @Override
     public List<T> apply() {
         try {
-            return find.answer(regex);
+            return search.answer(regex);
         } catch (NotFoundException ex) {
             return new ArrayList<>();
         }

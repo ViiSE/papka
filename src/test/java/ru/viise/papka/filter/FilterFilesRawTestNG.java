@@ -2,8 +2,8 @@ package ru.viise.papka.filter;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ru.viise.papka.find.FindDuplicatesByList;
-import ru.viise.papka.find.FindUniqueByList;
+import ru.viise.papka.search.SearchDuplicatesByList;
+import ru.viise.papka.search.SearchUniqueByList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class FilterFilesRawTestNG {
     @Test
     public void apply_withoutException() {
         Filter<List<String>> filter = new FilterFilesRaw(
-                new FindUniqueByList<>(),
+                new SearchUniqueByList<>(),
                 rawFiles);
         List<String> actual = filter.apply();
 
@@ -45,7 +45,7 @@ public class FilterFilesRawTestNG {
     @Test
     public void apply_tryCallException() {
         Filter<List<String>> filter = new FilterFilesRaw(
-                new FindDuplicatesByList<>(),
+                new SearchDuplicatesByList<>(),
                 expected);
         List<String> actual = filter.apply();
 
