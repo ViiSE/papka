@@ -14,15 +14,26 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.exception;
+package ru.viise.papka.system;
 
-public class NotFoundException extends Exception {
+import ru.viise.papka.entity.FoldersFile;
+import ru.viise.papka.entity.FoldersFileName;
+import ru.viise.papka.entity.NameFolderRoot;
 
-    public NotFoundException(String message) {
-        super(message);
+public class OsUnixLike implements Os {
+
+    @Override
+    public String root() {
+        return new NameFolderRoot().fullName();
     }
 
-    public NotFoundException(Exception ex) {
-        super(ex);
+    @Override
+    public Separator separator() {
+        return new SeparatorUnix();
+    }
+
+    @Override
+    public FoldersFile<String, String> foldersFile() {
+        return new FoldersFileName();
     }
 }

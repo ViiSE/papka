@@ -14,15 +14,8 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.exception;
+package ru.viise.papka.system;
 
-public class NotFoundException extends Exception {
-
-    public NotFoundException(String message) {
-        super(message);
-    }
-
-    public NotFoundException(Exception ex) {
-        super(ex);
-    }
+public interface OsRepository {
+    Os instance();
 }

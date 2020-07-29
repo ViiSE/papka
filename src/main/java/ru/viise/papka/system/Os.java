@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.exception;
+package ru.viise.papka.system;
 
-public class NotFoundException extends Exception {
+import ru.viise.papka.entity.FoldersFile;
 
-    public NotFoundException(String message) {
-        super(message);
-    }
-
-    public NotFoundException(Exception ex) {
-        super(ex);
-    }
+public interface Os {
+    String root();
+    Separator separator();
+    FoldersFile<String, String> foldersFile();
 }

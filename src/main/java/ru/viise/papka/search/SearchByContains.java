@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.exception;
+package ru.viise.papka.search;
 
-public class NotFoundException extends Exception {
+import ru.viise.papka.exception.NotFoundException;
 
-    public NotFoundException(String message) {
-        super(message);
+public class SearchByContains<T> implements Search<T, String> {
+
+    private final Search<T, String> search;
+
+    public SearchByContains(Search<T, String> search) {
+        this.search = search;
     }
 
-    public NotFoundException(Exception ex) {
-        super(ex);
+    @Override
+    public T answer(String ext) throws NotFoundException {
+        String extReg = ext.replaceAll("\\.", "\\\\.");
+        return search.answer("^.*" + extReg + ".*$");
     }
 }

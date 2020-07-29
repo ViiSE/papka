@@ -14,15 +14,26 @@
  * limitations under the License.
  */
 
-package ru.viise.papka.exception;
+package ru.viise.papka.system;
 
-public class NotFoundException extends Exception {
+import ru.viise.papka.entity.FoldersFile;
+import ru.viise.papka.entity.FoldersFileNameWin;
+import ru.viise.papka.entity.NameSystemDriveWin;
 
-    public NotFoundException(String message) {
-        super(message);
+public class OsWindows implements Os {
+
+    @Override
+    public String root() {
+        return new NameSystemDriveWin().fullName();
     }
 
-    public NotFoundException(Exception ex) {
-        super(ex);
+    @Override
+    public Separator separator() {
+        return new SeparatorWin();
+    }
+
+    @Override
+    public FoldersFile<String, String> foldersFile() {
+        return new FoldersFileNameWin(new SeparatorWin());
     }
 }
