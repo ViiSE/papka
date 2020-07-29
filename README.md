@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/viise/papka.png?branch=master)](https://travis-ci.org/viise/papka)
+[![Build Status](https://travis-ci.org/viise/papka.svg?branch=master)](https://travis-ci.org/viise/papka)
 [![Code Coverage](https://codecov.io/github/viise/papka/coverage.svg)](https://codecov.io/gh/viise/papka)
 # Papka
 Object-Oriented library for working with file tree.
