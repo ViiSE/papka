@@ -16,6 +16,8 @@
 
 package ru.viise.papka.entity;
 
+import ru.viise.papka.exception.NotFoundException;
+import ru.viise.papka.search.SearchFolderByFullName;
 import ru.viise.papka.system.Separator;
 import ru.viise.papka.system.SeparatorUnix;
 import ru.viise.papka.system.SeparatorWin;
@@ -207,8 +209,14 @@ public class FolderFileWin implements Folder<File> {
                 new SeparatorWin());
 
         Folder<File> prepRoot = trFolder.grow();
-        this.files = prepRoot.files();
-        this.children = prepRoot.children();
+        try {
+            Folder<File> searchFolder = new SearchFolderByFullName<>(prepRoot).answer(name.fullName());
+            this.files = searchFolder.files();
+            this.children = searchFolder.children();
+        } catch (NotFoundException ex) {
+            this.files = prepRoot.files();
+            this.children = prepRoot.children();
+        }
     }
 
     @Override

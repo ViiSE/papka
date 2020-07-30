@@ -250,6 +250,30 @@ public class FolderFileTestNG {
         root.travel(PrintTest::printFolderFile);
     }
 
+    @Test(priority = 13)
+    public void files_withNotRootName() {
+        Folder<File> actual = new FolderFile(
+                new NamePure("/music"),
+                "/music/misc/1.mp3",
+                "/music/misc/2.mp3",
+                "/music/misc/3.mp3",
+                "/music/ms.mp3"
+        );
+
+        Folder<String> expected = new FolderPure<>(
+                "/music",
+                new ArrayList<String>() {{ add("/music/ms.mp3"); }},
+                new FolderPure<>(
+                        "/music/misc",
+                        "/music/misc/1.mp3",
+                        "/music/misc/2.mp3",
+                        "/music/misc/3.mp3"
+                )
+        );
+
+        assertNotEquals(expected, actual);
+    }
+
     @Test
     public void eq_wrongType() {
         Folder<File> actual = new FolderFile(

@@ -212,6 +212,30 @@ public class FolderTextTestNG {
         assertNotEquals(expected, actual);
     }
 
+    @Test(priority = 13)
+    public void files_withNotRootName() {
+        Folder<String> actual = new FolderText(
+                new NamePure("/music"),
+                "/music/misc/1.mp3",
+                "/music/misc/2.mp3",
+                "/music/misc/3.mp3",
+                "/music/ms.mp3"
+        );
+
+        Folder<String> expected = new FolderPure<>(
+                "/music",
+                new ArrayList<String>() {{ add("/music/ms.mp3"); }},
+                new FolderPure<>(
+                        "/music/misc",
+                        "/music/misc/1.mp3",
+                        "/music/misc/2.mp3",
+                        "/music/misc/3.mp3"
+                )
+        );
+
+        assertNotEquals(expected, actual);
+    }
+
     private Folder<String> testFolder() {
         return new FolderText(
                 "/root124",

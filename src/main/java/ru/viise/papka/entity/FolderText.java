@@ -16,6 +16,10 @@
 
 package ru.viise.papka.entity;
 
+import ru.viise.papka.exception.NotFoundException;
+import ru.viise.papka.search.SearchFolderByFullName;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -109,8 +113,14 @@ public class FolderText implements Folder<String> {
         files = new ArrayList<>();
         children = new ArrayList<>();
         Folder<String> prepRoot = trFolder.grow();
-        this.files = prepRoot.files();
-        this.children = prepRoot.children();
+        try {
+            Folder<String> searchFolder = new SearchFolderByFullName<>(prepRoot).answer(name.fullName());
+            this.files = searchFolder.files();
+            this.children = searchFolder.children();
+        } catch (NotFoundException ex) {
+            this.files = prepRoot.files();
+            this.children = prepRoot.children();
+        }
     }
 
     @Override
