@@ -8,10 +8,10 @@ after_success:
 before_deploy:
   - export RELEASE_PKG_FILE=$(find target/papka* -type f -printf "%f")
   - echo "Deploy $RELEASE_PKG_FILE ..."
-  - SPLIT=(${RELEASE_PKG_FILE//_/ })
-  - VER=${SPLIT[1]}
-  - TAG=${VER%.jar}
-  - CUR_TAG=$(cat VERSION)
+  - export SPLIT=(${RELEASE_PKG_FILE//_/ })
+  - export VER=${SPLIT[1]}
+  - export TAG=${VER%.jar}
+  - export CUR_TAG=$(cat VERSION)
   - echo "Current Version $CUR_TAG"
   - echo "Version $TAG"
 
