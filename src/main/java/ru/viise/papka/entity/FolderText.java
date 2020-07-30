@@ -21,17 +21,44 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Folder with {@link java.lang.String} files from raw files.
+ * @see ru.viise.papka.entity.Folder
+ */
 public class FolderText implements Folder<String> {
 
+    /**
+     * Folder name.
+     */
     private final Name name;
+
+    /**
+     * Folder files.
+     */
     private List<String> files;
+
+    /**
+     * Folder children.
+     */
     private List<Folder<String>> children;
+
+    /**
+     * {@link TreeFolder}.
+     */
     private final TreeFolder<String> trFolder;
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files.
+     */
     public FolderText(List<String> rawFiles) {
         this(new NameFolderRoot(), rawFiles);
     }
 
+    /**
+     * Ctor.
+     * @param rawFiles Raw files.
+     */
     public FolderText(String... rawFiles) {
         this(new NameFolderRoot(), new TreeFolderPure<>(
                 new PreparedFoldersMapText(
@@ -39,10 +66,20 @@ public class FolderText implements Folder<String> {
         ));
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles Raw files.
+     */
     public FolderText(Name name, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)));
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles List of raw files.
+     */
     public FolderText(Name name, List<String> rawFiles) {
         this(name, new TreeFolderPure<>(
                 new PreparedFoldersMapText(
@@ -50,6 +87,12 @@ public class FolderText implements Folder<String> {
         ));
     }
 
+
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param trFolder {@link TreeFolder}.
+     */
     public FolderText(Name name, TreeFolder<String> trFolder) {
         this.name = name;
         this.trFolder = trFolder;

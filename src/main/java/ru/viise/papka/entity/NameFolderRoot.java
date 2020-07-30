@@ -16,6 +16,10 @@
 
 package ru.viise.papka.entity;
 
+/**
+ * Name of root folder.
+ * @see ru.viise.papka.entity.Name
+ */
 public class NameFolderRoot implements Name {
 
     @Override

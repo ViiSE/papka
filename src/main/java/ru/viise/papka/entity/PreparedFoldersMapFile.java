@@ -21,15 +21,36 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+/**
+ * Prepares folders as {@link Map}<String, {@link Folder}<File>>, where key is full folder name, and value is the folder
+ * with files.
+ * @see ru.viise.papka.entity.PreparedFolders
+ */
 public class PreparedFoldersMapFile implements PreparedFolders<Map<String, Folder<File>>> {
 
+    /**
+     * {@link PreparedFolders}.
+     */
     private final PreparedFolders<Map<String, List<String>>> prepFolders;
+
+    /**
+     * Exclude non-existent files?
+     */
     private final boolean excludeNonExisting;
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     */
     public PreparedFoldersMapFile(PreparedFolders<Map<String, List<String>>> prepFolders) {
         this(prepFolders, false);
     }
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     * @param excludeNonExisting Exclude non-existent files?
+     */
     public PreparedFoldersMapFile(
             PreparedFolders<Map<String, List<String>>> prepFolders,
             boolean excludeNonExisting) {

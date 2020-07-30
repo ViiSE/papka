@@ -22,10 +22,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Prepares folders as {@link Map}<String, {@link Folder}<File>>, where key is full folder name, and value is the list
+ * of folder files.
+ * @see ru.viise.papka.entity.PreparedFolders
+ */
 public class PreparedFoldersMapFileSystem implements PreparedFolders<Map<String, Folder<File>>> {
 
+    /**
+     * {@link PreparedFolders}.
+     */
     private final PreparedFolders<Map<String, List<File>>> prepFolders;
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     */
     public PreparedFoldersMapFileSystem(
             PreparedFolders<Map<String, List<File>>> prepFolders) {
         this.prepFolders = prepFolders;

@@ -16,6 +16,10 @@
 
 package ru.viise.papka.entity;
 
+/**
+ * Name of Windows system drive.
+ * @see ru.viise.papka.entity.Name
+ */
 public class NameSystemDriveWin implements Name {
 
     @Override

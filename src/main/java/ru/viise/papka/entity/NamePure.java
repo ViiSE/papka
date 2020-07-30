@@ -19,17 +19,45 @@ package ru.viise.papka.entity;
 import ru.viise.papka.system.Separator;
 import ru.viise.papka.system.SeparatorUnix;
 
+/**
+ * Pure implementation of Name interface.
+ * @see ru.viise.papka.entity.Name
+ */
 public class NamePure implements Name {
 
+    /**
+     * Pure full name.
+     */
     private String pureFullName;
+
+    /**
+     * Pure short name;
+     */
     private String pureShortName;
+
+    /**
+     * Raw full name.
+     */
     private final String fullName;
+
+    /**
+     * {@link Separator}.
+     */
     private final Separator separator;
 
+    /**
+     * Ctor.
+     * @param fullName Raw full name.
+     */
     public NamePure(String fullName) {
         this(fullName, new SeparatorUnix());
     }
 
+    /**
+     * Ctor.
+     * @param fullName Raw full name.
+     * @param separator {@link Separator}.
+     */
     public NamePure(String fullName, Separator separator) {
         this.fullName = fullName;
         this.separator = separator;

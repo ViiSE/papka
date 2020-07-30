@@ -26,22 +26,53 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Pure implementation of TreeFolder interface.
+ * @param <T> Type of folder files.
+ * @see ru.viise.papka.entity.TreeFolder
+ */
 public class TreeFolderPure<T> implements TreeFolder<T> {
 
+    /**
+     * {@link FoldersFile}.
+     */
     private final FoldersFile<String, String> foldersFile;
+
+    /**
+     * {@link PreparedFolders}.
+     */
     private final PreparedFolders<Map<String, Folder<T>>> prepFolders;
+
+    /**
+     * {@link Separator}.
+     */
     private final Separator separator;
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     */
     public TreeFolderPure(PreparedFolders<Map<String, Folder<T>>> prepFolders) {
         this(new FoldersFileName(), prepFolders);
     }
 
+    /**
+     * Ctor.
+     * @param foldersFile {@link FoldersFile}.
+     * @param prepFolders {@link PreparedFolders}.
+     */
     public TreeFolderPure(
             FoldersFile<String, String> foldersFile,
             PreparedFolders<Map<String, Folder<T>>> prepFolders) {
         this(foldersFile, prepFolders, new SeparatorUnix());
     }
 
+    /**
+     * Ctor.
+     * @param foldersFile {@link FoldersFile}.
+     * @param prepFolders {@link PreparedFolders}.
+     * @param separator {@link Separator}.
+     */
     public TreeFolderPure(
             FoldersFile<String, String> foldersFile,
             PreparedFolders<Map<String, Folder<T>>> prepFolders,

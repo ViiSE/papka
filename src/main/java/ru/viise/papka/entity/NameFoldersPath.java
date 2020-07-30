@@ -21,18 +21,46 @@ import ru.viise.papka.system.SeparatorUnix;
 
 import java.util.List;
 
+/**
+ * Full folder path from folder names.
+ * @see ru.viise.papka.entity.Name
+ */
 public class NameFoldersPath implements Name {
 
+    /**
+     * Full name.
+     */
     private String fullName = "";
+
+    /**
+     * Short name.
+     */
     private String shortName = "";
+
+    /**
+     * {@link Separator}.
+     */
     private final Separator separator;
+
+    /**
+     * List of folders name;
+     */
     private final List<String> foldersName;
 
+    /**
+     * Ctor.
+     * @param foldersName List of folders name.
+     * @param separator {@link Separator}.
+     */
     public NameFoldersPath(List<String> foldersName, Separator separator) {
         this.separator = separator;
         this.foldersName = foldersName;
     }
 
+    /**
+     * Ctor.
+     * @param foldersName List of folders name.
+     */
     public NameFoldersPath(List<String> foldersName) {
         this(foldersName, new SeparatorUnix());
     }

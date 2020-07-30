@@ -16,6 +16,15 @@
 
 package ru.viise.papka.entity;
 
+/**
+ * TreeFolder builds a folder tree. Recommended to use PreparedFolders and use its result to build a tree folder.
+ * @param <T> Type of folder files.
+ * @see PreparedFolders
+ */
 public interface TreeFolder<T> {
+
+    /**
+     * @return Folder built like a tree.
+     */
     Folder<T> grow();
 }

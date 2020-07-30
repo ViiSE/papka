@@ -22,49 +22,122 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Folder with {@link java.io.File} files from raw files.
+ * @see ru.viise.papka.entity.Folder
+ */
 public class FolderFile implements Folder<File> {
 
+    /**
+     * Folder name.
+     */
     private final Name name;
+
+    /**
+     * Folder files.
+     */
     private List<File> files;
+
+    /**
+     * Folder children.
+     */
     private List<Folder<File>> children;
+
+    /**
+     * {@link TreeFolder}.
+     */
     private final TreeFolder<File> trFolder;
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files.
+     */
     public FolderFile(String... rawFiles) {
         this(new NameFolderRoot(), new ArrayList<>(Arrays.asList(rawFiles)));
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles Raw files.
+     */
     public FolderFile(Name name, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)), false);
     }
 
+    /**
+     * Ctor.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param rawFiles Raw files.
+     */
     public FolderFile(boolean excludeNonExisting, String... rawFiles) {
         this(new NameFolderRoot(), new ArrayList<>(Arrays.asList(rawFiles)), excludeNonExisting);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param rawFiles Raw files.
+     */
     public FolderFile(Name name, boolean excludeNonExisting, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)), new FoldersFileName(), excludeNonExisting);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param foldersFile {@link FoldersFile}.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param rawFiles Raw files.
+     */
     public FolderFile(Name name, FoldersFile<String, String> foldersFile, boolean excludeNonExisting, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)), foldersFile, excludeNonExisting);
     }
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files.
+     */
     public FolderFile(List<String> rawFiles) {
         this(new NameFolderRoot(), rawFiles);
     }
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files.
+     * @param excludeNonExisting Exclude non-existent files?
+     */
     public FolderFile(List<String> rawFiles, boolean excludeNonExisting) {
         this(new NameFolderRoot(), rawFiles, excludeNonExisting);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles List of raw files.
+     */
     public FolderFile(Name name, List<String> rawFiles) {
         this(name, rawFiles, false);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles List of raw files.
+     * @param excludeNonExisting Exclude non-existent files?
+     */
     public FolderFile(Name name, List<String> rawFiles, boolean excludeNonExisting) {
         this(name, rawFiles, new FoldersFileName(), excludeNonExisting);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles List of raw files.
+     * @param foldersFile {@link FoldersFile}.
+     * @param excludeNonExisting Exclude non-existent files?
+     */
     public FolderFile(Name name, List<String> rawFiles, FoldersFile<String, String> foldersFile, boolean excludeNonExisting) {
         this(name, new TreeFolderPure<>(
                 foldersFile,
@@ -76,6 +149,11 @@ public class FolderFile implements Folder<File> {
         ));
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param trFolder {@link TreeFolder}
+     */
     public FolderFile(Name name, TreeFolder<File> trFolder) {
         this.name = name;
         this.trFolder = trFolder;

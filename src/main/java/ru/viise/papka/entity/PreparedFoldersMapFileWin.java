@@ -27,22 +27,53 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Prepares folders as {@link Map}<String, {@link Folder}<File>>, where key is full folder name, and value is the folder
+ * with files of Windows.
+ * @see ru.viise.papka.entity.PreparedFolders
+ */
 public class PreparedFoldersMapFileWin implements PreparedFolders<Map<String, Folder<File>>> {
 
+    /**
+     * {@link PreparedFolders}.
+     */
     private final PreparedFolders<Map<String, List<String>>> prepFolders;
+
+    /**
+     * Exclude non-existent files?
+     */
     private final boolean excludeNonExisting;
+
+    /**
+     * Raw files is unix like?
+     */
     private final boolean isUnixLike;
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     */
     public PreparedFoldersMapFileWin(PreparedFolders<Map<String, List<String>>> prepFolders) {
         this(prepFolders, false, false);
     }
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     * @param excludeNonExisting Exclude non-existent files?
+     */
     public PreparedFoldersMapFileWin(
             PreparedFolders<Map<String, List<String>>> prepFolders,
             boolean excludeNonExisting) {
         this(prepFolders, excludeNonExisting, false);
     }
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param isUnixLike Raw files is unix like?
+     */
     public PreparedFoldersMapFileWin(
             PreparedFolders<Map<String, List<String>>> prepFolders,
             boolean excludeNonExisting,

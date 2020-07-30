@@ -19,6 +19,10 @@ package ru.viise.papka.entity;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Folders like names from full filename.
+ * @see ru.viise.papka.entity.FoldersFile
+ */
 public class FoldersFileName implements FoldersFile<String, String> {
 
     @Override

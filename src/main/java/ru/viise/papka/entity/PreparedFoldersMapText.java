@@ -20,10 +20,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Prepares folders as {@link Map}<String, Folder<String>>, where key is full folder name, and value is the folder with
+ * files like short filenames.
+ * @see ru.viise.papka.entity.PreparedFolders
+ */
 public class PreparedFoldersMapText implements PreparedFolders<Map<String, Folder<String>>> {
 
+    /**
+     * {@link PreparedFolders}.
+     */
     private final PreparedFolders<Map<String, List<String>>> prepFolders;
 
+    /**
+     * Ctor.
+     * @param prepFolders {@link PreparedFolders}.
+     */
     public PreparedFoldersMapText(PreparedFolders<Map<String, List<String>>> prepFolders) {
         this.prepFolders = prepFolders;
     }

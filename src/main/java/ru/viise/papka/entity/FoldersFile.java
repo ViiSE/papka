@@ -18,6 +18,17 @@ package ru.viise.papka.entity;
 
 import java.util.List;
 
+/**
+ * FoldersFile is necessary from generating tree folder. It allows get short filename and the short names of folders in
+ * which file is located.
+ * @param <T> Type of folder.
+ * @param <V> Type of file.
+ */
 public interface FoldersFile<T, V> {
+
+    /**
+     * @param file File to create a list of folders.
+     * @return list of file folders.
+     */
     List<T> folders(V file);
 }

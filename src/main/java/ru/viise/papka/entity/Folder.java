@@ -19,7 +19,21 @@ package ru.viise.papka.entity;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Folder contains files and children. Children is another Folder, which can be obtained with {@link #children()} method
+ * from {@link Node} interface, or can be reached with {@link #travel(Consumer)} method.
+ * @param <T> Type of folder file.
+ */
 public interface Folder<T> extends Node<Folder<T>>, Name {
+
+    /**
+     * @return List of files folder.
+     */
     List<T> files();
+
+    /**
+     * Traversal of the file tree, starting at the root.
+     * @param folder condition for visited folders.
+     */
     void travel(Consumer<? super Folder<T>> folder);
 }

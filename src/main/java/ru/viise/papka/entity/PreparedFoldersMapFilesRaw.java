@@ -22,20 +22,51 @@ import ru.viise.papka.system.SeparatorUnix;
 import java.io.File;
 import java.util.*;
 
+/**
+ * Prepares folders as {@link Map}<String, List<File>>, where key is full folder name, and value is the list of folder
+ * files.
+ * @see ru.viise.papka.entity.PreparedFolders
+ */
 public class PreparedFoldersMapFilesRaw implements PreparedFolders<Map<String, List<File>>> {
 
+    /**
+     * {@link FoldersFile}.
+     */
     private final FoldersFile<String, String> foldersFile;
+
+    /**
+     * {@link Separator}.
+     */
     private final Separator separator;
+
+    /**
+     * List of all files folders.
+     */
     private final List<File> files;
 
+    /**
+     * Ctor.
+     * @param files List of all files folders.
+     */
     public PreparedFoldersMapFilesRaw(List<File> files) {
         this(new FoldersFileName(), files);
     }
 
+    /**
+     * Ctor.
+     * @param foldersFile {@link FoldersFile}.
+     * @param files List of all files folders.
+     */
     public PreparedFoldersMapFilesRaw(FoldersFile<String, String> foldersFile, List<File> files) {
         this(foldersFile, new SeparatorUnix(), files);
     }
 
+    /**
+     * Ctor.
+     * @param foldersFile {@link FoldersFile}.
+     * @param separator {@link Separator}.
+     * @param files List of all files folders.
+     */
     public PreparedFoldersMapFilesRaw(FoldersFile<String, String> foldersFile, Separator separator, List<File> files) {
         this.foldersFile = foldersFile;
         this.separator = separator;

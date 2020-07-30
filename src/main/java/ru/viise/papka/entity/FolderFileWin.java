@@ -26,60 +26,152 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Folder with {@link java.io.File} files from raw files for Windows.
+ * @see ru.viise.papka.entity.Folder
+ */
 public class FolderFileWin implements Folder<File> {
 
+    /**
+     * Folder name.
+     */
     private final Name name;
+
+    /**
+     * Folder files.
+     */
     private List<File> files;
+
+    /**
+     * Folder children.
+     */
     private List<Folder<File>> children;
 
+    /**
+     * Raw files.
+     */
     private final List<String> rawFiles;
+
+    /**
+     * Exclude non-existent files?
+     */
     private final boolean excludeNonExisting;
+
+    /**
+     * Raw files is unix like?
+     */
     private final boolean isUnixLike;
 
+    /**
+     * Ctor.
+     * @param rawFiles list of raw files.
+     */
     public FolderFileWin(String... rawFiles) {
         this(new NameFolderRoot(), new ArrayList<>(Arrays.asList(rawFiles)));
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles Raw files.
+     */
     public FolderFileWin(Name name, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)), false, false);
     }
 
+    /**
+     * Ctor.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param rawFiles Raw files.
+     */
     public FolderFileWin(boolean excludeNonExisting, String... rawFiles) {
         this(new NameFolderRoot(), new ArrayList<>(Arrays.asList(rawFiles)), excludeNonExisting, false);
     }
 
+    /**
+     * Ctor.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param isUnixLike Raw files is unix like?
+     * @param rawFiles Raw files.
+     */
     public FolderFileWin(boolean excludeNonExisting, boolean isUnixLike, String... rawFiles) {
         this(new NameFolderRoot(), new ArrayList<>(Arrays.asList(rawFiles)), excludeNonExisting, isUnixLike);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param rawFiles Raw files.
+     */
     public FolderFileWin(Name name, boolean excludeNonExisting, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)), excludeNonExisting, false);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param isUnixLike Raw files is unix like?
+     * @param rawFiles Raw files.
+     */
     public FolderFileWin(Name name, boolean excludeNonExisting, boolean isUnixLike, String... rawFiles) {
         this(name, new ArrayList<>(Arrays.asList(rawFiles)), excludeNonExisting, isUnixLike);
     }
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files.
+     */
     public FolderFileWin(List<String> rawFiles) {
         this(new NameFolderRoot(), rawFiles);
     }
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files.
+     * @param excludeNonExisting Exclude non-existent files?
+     */
     public FolderFileWin(List<String> rawFiles, boolean excludeNonExisting) {
         this(new NameFolderRoot(), rawFiles, excludeNonExisting, false);
     }
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param isUnixLike Raw files is unix like?
+     */
     public FolderFileWin(List<String> rawFiles, boolean excludeNonExisting, boolean isUnixLike) {
         this(new NameFolderRoot(), rawFiles, excludeNonExisting, isUnixLike);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles List of raw files.
+     */
     public FolderFileWin(Name name, List<String> rawFiles) {
         this(name, rawFiles, false, false);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles List of raw files.
+     * @param excludeNonExisting Exclude non-existent files?
+     */
     public FolderFileWin(Name name, List<String> rawFiles, boolean excludeNonExisting) {
         this(name, rawFiles, excludeNonExisting, false);
     }
 
+    /**
+     * Ctor.
+     * @param name Folder name.
+     * @param rawFiles List of raw files.
+     * @param excludeNonExisting Exclude non-existent files?
+     * @param isUnixLike Raw files is unix like?
+     */
     public FolderFileWin(Name name, List<String> rawFiles, boolean excludeNonExisting, boolean isUnixLike) {
         this.name = name;
         this.rawFiles = rawFiles;

@@ -18,6 +18,17 @@ package ru.viise.papka.entity;
 
 import java.util.List;
 
+/**
+ * Each tree folder filesystem has a node. In our case, folder is a node that has children and does not have a parent.
+ *
+ * It's necessary to separate such entities as Folder and Node: in filesystems folder is a node, but in different cases
+ * folder may not be a node.
+ * @param <T> Child type.
+ */
 public interface Node<T> {
+
+    /**
+     * @return List of child node.
+     */
     List<T> children();
 }

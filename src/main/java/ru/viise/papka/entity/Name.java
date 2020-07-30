@@ -16,7 +16,18 @@
 
 package ru.viise.papka.entity;
 
+/**
+ * Name exists, because all operations about files and folders do not occur without the participation of their name.
+ */
 public interface Name {
+
+    /**
+     * @return Short name.
+     */
     String shortName();
+
+    /**
+     * @return Full name.
+     */
     String fullName();
 }

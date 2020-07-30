@@ -16,6 +16,15 @@
 
 package ru.viise.papka.entity;
 
+/**
+ * PreparedFolders prepares raw files for the subsequent tree folder building. This is the first point of building a
+ * tree folder.
+ * @param <T> Prepared type for further processing.
+ */
 public interface PreparedFolders<T> {
+
+    /**
+     * @return Prepared data for subsequent tree building.
+     */
     T preparation();
 }

@@ -21,10 +21,21 @@ import ru.viise.papka.system.Separator;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Folders like names from full filename for Windows.
+ * @see ru.viise.papka.entity.FoldersFile
+ */
 public class FoldersFileNameWin implements FoldersFile<String, String> {
 
+    /**
+     * {@link Separator}.
+     */
     private final Separator separator;
 
+    /**
+     * Ctor.
+     * @param separator {@link Separator}.
+     */
     public FoldersFileNameWin(Separator separator) {
         this.separator = separator;
     }
