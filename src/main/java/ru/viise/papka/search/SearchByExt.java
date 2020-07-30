@@ -18,10 +18,22 @@ package ru.viise.papka.search;
 
 import ru.viise.papka.exception.NotFoundException;
 
+/**
+ * Search by extension.
+ * @param <T> Type to search for.
+ * @see ru.viise.papka.search.Search
+ */
 public class SearchByExt<T> implements Search<T, String> {
 
+    /**
+     * {@link Search}.
+     */
     private final Search<T, String> search;
 
+    /**
+     * Ctor.
+     * @param search {@link Search}.
+     */
     public SearchByExt(Search<T, String> search) {
         this.search = search;
     }

@@ -18,6 +18,17 @@ package ru.viise.papka.search;
 
 import ru.viise.papka.exception.NotFoundException;
 
+/**
+ * Searches for both files and folders.
+ * @param <T> Type to search for.
+ * @param <V> Type of search condition.
+ */
 public interface Search<T, V> {
+
+    /**
+     * @param query Search condition.
+     * @return Search result.
+     * @throws NotFoundException If search did not return any result.
+     */
     T answer(V query) throws NotFoundException;
 }

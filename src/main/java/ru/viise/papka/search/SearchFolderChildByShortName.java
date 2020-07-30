@@ -21,10 +21,22 @@ import ru.viise.papka.exception.NotFoundException;
 
 import java.util.List;
 
+/**
+ * Search folder child by short name.
+ * @param <T> Type to search for.
+ * @see ru.viise.papka.search.SearchFolder
+ */
 public class SearchFolderChildByShortName<T> implements SearchFolder<T, String> {
 
+    /**
+     * List of child folder.
+     */
     private final List<Folder<T>> children;
 
+    /**
+     * Ctor.
+     * @param children List of child folder.
+     */
     public SearchFolderChildByShortName(List<Folder<T>> children) {
         this.children = children;
     }

@@ -26,10 +26,22 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Search files in system.
+ * Regex supported.
+ * @see ru.viise.papka.search.Search
+ */
 public class SearchFilesInSystem implements Search<List<File>, String> {
 
+    /**
+     * Name of the folder to start the search from.
+     */
     private final String beginWith;
 
+    /**
+     * Ctor.
+     * @param beginWith Name of the folder to start the search from.
+     */
     public SearchFilesInSystem(String beginWith) {
         this.beginWith = beginWith;
     }

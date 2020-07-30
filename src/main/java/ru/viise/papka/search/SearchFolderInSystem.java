@@ -27,16 +27,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Search folder by name in system.
+ * Regex supported.
+ * @see ru.viise.papka.search.SearchFolder
+ */
 public class SearchFolderInSystem implements SearchFolder<File, String> {
 
+    /**
+     * {@link OsRepository}.
+     */
     private final OsRepository osRepo;
+
+    /**
+     * Name of the folder to start the search from.
+     */
     private final String beginWith;
 
+    /**
+     * Ctor.
+     * @param osRepo {@link OsRepository}.
+     * @param beginWith Name of the folder to start the search from.
+     */
     public SearchFolderInSystem(OsRepository osRepo, String beginWith) {
         this.osRepo = osRepo;
         this.beginWith = beginWith;
     }
 
+    /**
+     * Ctor.
+     * @param beginWith Name of the folder to start the search from.
+     */
     public SearchFolderInSystem(String beginWith) {
         this(new OsRepo(), beginWith);
     }

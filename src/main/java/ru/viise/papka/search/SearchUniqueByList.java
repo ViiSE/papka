@@ -22,6 +22,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Search unique values.
+ * @param <T> Type to search for.
+ * @see ru.viise.papka.search.Search
+ */
 public class SearchUniqueByList<T> implements Search<List<T>, List<T>> {
 
     @Override

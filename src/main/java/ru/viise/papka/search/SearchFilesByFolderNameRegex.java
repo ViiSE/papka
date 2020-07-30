@@ -23,11 +23,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Search files by folder name.
+ * Regex supported.
+ * @param <T> Type of folder files to search for.
+ * @see ru.viise.papka.search.Search
+ */
 public class SearchFilesByFolderNameRegex<T> implements Search<List<T>, String> {
 
+    /**
+     * {@link Folder} being searched.
+     */
     private final Folder<T> folder;
+
+    /**
+     * Search by full or short name?
+     */
     private final boolean isFullName;
 
+    /**
+     * Ctor.
+     * @param folder {@link Folder} being searched.
+     * @param isFullName Search by full or short name?
+     */
     public SearchFilesByFolderNameRegex(
             Folder<T> folder,
             boolean isFullName) {
@@ -35,6 +53,10 @@ public class SearchFilesByFolderNameRegex<T> implements Search<List<T>, String> 
         this.isFullName = isFullName;
     }
 
+    /**
+     * Ctor.
+     * @param folder {@link Folder} being searched.
+     */
     public SearchFilesByFolderNameRegex(Folder<T> folder) {
         this(folder, true);
     }

@@ -21,6 +21,18 @@ import ru.viise.papka.exception.NotFoundException;
 
 import java.util.List;
 
+/**
+ * The FindFolders interface searches for a folders by a given criterion.
+ * @param <T> Type of folder files.
+ * @param <V> Type of search condition.
+ * @see ru.viise.papka.search.Search
+ */
 public interface SearchFolders<T, V> extends Search<List<Folder<T>>, V> {
+
+    /**
+     * @param query Search condition.
+     * @return Found list of folders.
+     * @throws NotFoundException If search did not return any result.
+     */
     List<Folder<T>> answer(V query) throws NotFoundException;
 }

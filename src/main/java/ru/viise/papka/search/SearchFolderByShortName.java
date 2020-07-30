@@ -22,15 +22,36 @@ import ru.viise.papka.exception.NotFoundException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Search folder by short name.
+ * @param <T> Type to search for.
+ * @see ru.viise.papka.search.SearchFolder
+ */
 public class SearchFolderByShortName<T> implements SearchFolder<T, String> {
 
+    /**
+     * {@link Folder} being searched.
+     */
     private final Folder<T> folder;
+
+    /**
+     * Search folder to end of folder tree or search to first match with search criteria?
+     */
     private final boolean isLast;
 
+    /**
+     * Ctor.
+     * @param folder {@link Folder} being searched.
+     */
     public SearchFolderByShortName(Folder<T> folder) {
         this(folder, false);
     }
 
+    /**
+     * Ctor.
+     * @param folder {@link Folder} being searched.
+     * @param isLast Search folder to end of folder tree or search to first match with search criteria?
+     */
     public SearchFolderByShortName(Folder<T> folder, boolean isLast) {
         this.folder = folder;
         this.isLast = isLast;

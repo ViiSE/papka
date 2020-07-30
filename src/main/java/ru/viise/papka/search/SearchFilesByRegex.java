@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Search files by regex.
+ * @see ru.viise.papka.search.Search
+ */
 public class SearchFilesByRegex implements Search<List<String>, String> {
+
 
     private final boolean includeChildren;
     private final Folder<String> folder;

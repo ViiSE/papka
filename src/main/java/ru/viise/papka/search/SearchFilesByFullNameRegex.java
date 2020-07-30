@@ -24,16 +24,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Search files by full name.
+ * Regex supported.
+ * @see ru.viise.papka.search.Search
+ */
 public class SearchFilesByFullNameRegex implements Search<List<File>, String> {
 
+    /**
+     * To do a full depth-first search, include all children?
+     */
     private final boolean includeChildren;
+
+    /**
+     * {@link Folder} being searched.
+     */
     private final Folder<File> folder;
 
+    /**
+     * Ctor.
+     * @param folder {@link Folder} being searched.
+     * @param includeChildren To do a full depth-first search, include all children?
+     */
     public SearchFilesByFullNameRegex(Folder<File> folder, boolean includeChildren) {
         this.folder = folder;
         this.includeChildren = includeChildren;
     }
 
+    /**
+     * Ctor.
+     * @param folder {@link Folder} being searched.
+     */
     public SearchFilesByFullNameRegex(Folder<File> folder) {
         this(folder, false);
     }

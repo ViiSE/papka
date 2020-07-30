@@ -22,10 +22,22 @@ import ru.viise.papka.exception.NotFoundException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Search folder by full name.
+ * @param <T> Type to search for.
+ * @see ru.viise.papka.search.SearchFolder
+ */
 public class SearchFolderByFullName<T> implements SearchFolder<T, String> {
 
+    /**
+     * {@link Folder} being searched.
+     */
     private final Folder<T> folder;
 
+    /**
+     * Ctor.
+     * @param folder {@link Folder} being searched.
+     */
     public SearchFolderByFullName(Folder<T> folder) {
         this.folder = folder;
     }
