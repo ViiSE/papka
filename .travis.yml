@@ -9,11 +9,11 @@ before_deploy:
   - export RELEASE_PKG_FILE=$(find target/papka* -type f -printf "%f")
   - echo "Deploy $RELEASE_PKG_FILE ..."
   - SPLIT=(${RELEASE_PKG_FILE//_/ })
-    VER=${SPLIT[1]}
-    TAG=${VER%.jar}
-    CUR_TAG=$(cat VERSION)
-    echo Current Version $CUR_TAG
-    echo Version $TAG
+  - VER=${SPLIT[1]}
+  - TAG=${VER%.jar}
+  - CUR_TAG=$(cat VERSION)
+  - echo Current Version $CUR_TAG
+  - echo Version $TAG
 
 deploy:
   provider: releases
