@@ -16,12 +16,24 @@
 
 package ru.viise.papka.exception;
 
+/**
+ * Not found exception.
+ * @see java.lang.Exception
+ */
 public class NotFoundException extends Exception {
 
+    /**
+     * Ctor.
+     * @param message Exception message.
+     */
     public NotFoundException(String message) {
         super(message);
     }
 
+    /**
+     * Ctor.
+     * @param ex Exception.
+     */
     public NotFoundException(Exception ex) {
         super(ex);
     }
