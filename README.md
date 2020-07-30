@@ -122,7 +122,7 @@ In our case, <code>travel()</code> starts in folder <code>/</code> (root). Then 
 Thus, method <code>travel()</code> traverses the entire file tree.
 
 ### Search
-Search is carried out through the <code>Find</code> interface.
+Search is carried out through the <code>Search</code> interface.
 <br>
 <br>
 <b>Find files</b>
