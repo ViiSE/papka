@@ -1,7 +1,27 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 script:
-  - mvn package
+- mvn package
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+before_deploy:
+  - export RELEASE_PKG_FILE=$(find target/papka* -type f -printf "%f")
+  - echo "Deploy $RELEASE_PKG_FILE ..."
+  - SPLIT=(${RELEASE_PKG_FILE//_/ })
+    VER=${SPLIT[1]}
+    TAG=${VER%.jar}
+    CUR_TAG=$(cat VERSION)
+    echo Current Version $CUR_TAG
+    echo Version $TAG
+
+deploy:
+  provider: releases
+  api_key:
+    secure: lPK5DfTOhviT4DWoo6ZilV/Aufzg8i3nzXKA8CcR5vpBEPTOf28ZqZ3GzhObM+WePYqi6YUehx+Tn5tSLvpdDvvRvz4x4P8KFEb1Xpm/lUktpCqyQS9W9m+yga/0G4goniI7GQyftW9DRQBvILFQOjPFXfmysK9bI/j4XHXyq0elF3g871s7EXAqH3Vz3I8rxPZRtR6tpNyrjmTn58oWMkLIplMoAZrlB2k+4jz7j0YcXI4m1YVXjuY6J5dTmqS6L863wXbZ1MzDI1P9wVKKojLRklsfqiosjpoCWqhYbEgyiQ7fCu8U+5/v8EooLZCApdAkAql1eakYmPOZlM1drlUx03bfF+4vmM1dejTI0aaUcZLWQkA48T/+8q2OvL7Pyb2Nf+LDo955JQhTMWrDUXRxVTaH9mSFuZ0Lv++9NDAXWBcfUJZZ2V++Fe5gZrBV2wgm5B6Ku7xJkgK7HlTz4f6FSuS4RG0+bnvHoGu7olYa1rc8h+czspmQWeuuS8y6SbhRM4BFA238OQkNUtErvpLu8yo0vbNMGNnvQzVySI9frkyFxJgaSoOP5aQQ+ACN0hOb6efX51XbDG1CQe2JQ/oIHm6FzuII6TuDg3e0urY1XkkSlzOdyOfQsHebHtQSG5fyFyo+pM7dJ0LbkEnT9c8iSooC+6XVTUWU3kZAsP0=
+  file_glob: true
+  file: "${RELEASE_PKG_FILE}"
+  on:
+    repo: ViiSE/papka
+    condition: $TAG=$CUR_TAG
+  skip_cleanup: 'true'
