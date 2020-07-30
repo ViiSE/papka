@@ -20,8 +20,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Basic OS repository.
+ * @see ru.viise.papka.system.OsRepository
+ */
 public class OsRepo implements OsRepository {
 
+    /**
+     * Map of OS, key is short OS name, value is OS.
+     */
     private final Map<String, Os> osMap = new HashMap<>();
 
     @Override

@@ -16,6 +16,14 @@
 
 package ru.viise.papka.system;
 
+/**
+ * Directory.
+ * @param <T> Type of name.
+ */
 public interface Directory<T> {
+
+    /**
+     * @return Name of directory.
+     */
     T name();
 }

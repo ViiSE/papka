@@ -16,11 +16,27 @@
 
 package ru.viise.papka.system;
 
+/**
+ * Example directory in project.
+ * @see ru.viise.papka.system.Directory
+ */
 public class ExampleDirectory implements Directory<String> {
 
+    /**
+     * Current {@link Directory}.
+     */
     private final Directory<String> curDir;
+
+    /**
+     * {@link Separator}.
+     */
     private final Separator separator;
 
+    /**
+     * Ctor.
+     * @param curDir Current {@link Directory}.
+     * @param separator {@link Separator}.
+     */
     public ExampleDirectory(Directory<String> curDir, Separator separator) {
         this.curDir = curDir;
         this.separator = separator;

@@ -18,8 +18,23 @@ package ru.viise.papka.system;
 
 import ru.viise.papka.entity.FoldersFile;
 
+/**
+ * Operating System (OS).
+ */
 public interface Os {
+
+    /**
+     * @return Root of OS.
+     */
     String root();
+
+    /**
+     * @return {@link Separator} of OS.
+     */
     Separator separator();
+
+    /**
+     * @return {@link FoldersFile} for OS.
+     */
     FoldersFile<String, String> foldersFile();
 }

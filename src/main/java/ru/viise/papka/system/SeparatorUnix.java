@@ -16,6 +16,10 @@
 
 package ru.viise.papka.system;
 
+/**
+ * Separator for Unix-like OS.
+ * @see ru.viise.papka.system.Separator
+ */
 public class SeparatorUnix implements Separator {
 
     @Override

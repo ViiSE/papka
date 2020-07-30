@@ -16,8 +16,15 @@
 
 package ru.viise.papka.system;
 
+/**
+ * Current program directory.
+ * @see ru.viise.papka.system.Directory
+ */
 public class CurrentDirectory implements Directory<String> {
 
+    /**
+     * {@link Separator}.
+     */
     private final Separator separator;
 
     public CurrentDirectory(Separator separator) {

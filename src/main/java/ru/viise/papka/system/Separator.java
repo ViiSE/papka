@@ -16,9 +16,28 @@
 
 package ru.viise.papka.system;
 
+/**
+ *  Separator for full name of files and folders.
+ */
 public interface Separator {
+
+    /**
+     * @return Basic separator.
+     */
     String pure();
+
+    /**
+     * @return Basic char separator.
+     */
     char charS();
+
+    /**
+     * @return Separator for using in regex.
+     */
     String regex();
+
+    /**
+     * @return Separator of another {@link Os}. Used to replace one separator with another.
+     */
     Separator mirror();
 }

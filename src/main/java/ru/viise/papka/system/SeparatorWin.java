@@ -16,6 +16,10 @@
 
 package ru.viise.papka.system;
 
+/**
+ * Separator for Windows OS.
+ * @see ru.viise.papka.system.Separator
+ */
 public class SeparatorWin implements Separator {
 
     @Override

@@ -16,6 +16,13 @@
 
 package ru.viise.papka.system;
 
+/**
+ * OS repository.
+ */
 public interface OsRepository {
+
+    /**
+     * @return Instance of current {@link Os}.
+     */
     Os instance();
 }

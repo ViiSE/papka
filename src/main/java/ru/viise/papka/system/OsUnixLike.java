@@ -20,6 +20,10 @@ import ru.viise.papka.entity.FoldersFile;
 import ru.viise.papka.entity.FoldersFileName;
 import ru.viise.papka.entity.NameFolderRoot;
 
+/**
+ * Unix-like OS.
+ * @see ru.viise.papka.system.Os
+ */
 public class OsUnixLike implements Os {
 
     @Override

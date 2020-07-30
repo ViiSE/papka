@@ -20,6 +20,10 @@ import ru.viise.papka.entity.FoldersFile;
 import ru.viise.papka.entity.FoldersFileNameWin;
 import ru.viise.papka.entity.NameSystemDriveWin;
 
+/**
+ * OS Windows.
+ * @see ru.viise.papka.system.Os
+ */
 public class OsWindows implements Os {
 
     @Override
