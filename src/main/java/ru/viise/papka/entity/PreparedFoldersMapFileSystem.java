@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Prepares folders as {@link Map}<String, {@link Folder}<File>>, where key is full folder name, and value is the list
+ * Prepares folders as {@link Map}&lt;String, {@link Folder}&lt;File&gt;&gt;, where key is full folder name, and value is the list
  * of folder files.
  * @see ru.viise.papka.entity.PreparedFolders
  */
