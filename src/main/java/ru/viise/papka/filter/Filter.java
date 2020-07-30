@@ -16,6 +16,14 @@
 
 package ru.viise.papka.filter;
 
+/**
+ * The interface Filter provides filtering. It differs from Find in that it does not throws NotFoundException.
+ * @param <T> Type of data being filtered.
+ */
 public interface Filter<T> {
+
+    /**
+     * @return Filtered data.
+     */
     T apply();
 }

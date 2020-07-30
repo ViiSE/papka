@@ -23,11 +23,28 @@ import ru.viise.papka.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Filter folders.
+ * @param <T> Type of folders files being filtered.
+ * @see ru.viise.papka.filter.Filter
+ */
 public class FilterFolders<T> implements Filter<List<Folder<T>>> {
 
+    /**
+     * {@link Search}.
+     */
     private final Search<List<Folder<T>>, String> searchFolders;
+
+    /**
+     * Filter condition.
+     */
     private final String pattern;
 
+    /**
+     * Ctor.
+     * @param searchFolders {@link Search}.
+     * @param pattern Filter condition.
+     */
     public FilterFolders(Search<List<Folder<T>>, String> searchFolders, String pattern) {
         this.searchFolders = searchFolders;
         this.pattern = pattern;

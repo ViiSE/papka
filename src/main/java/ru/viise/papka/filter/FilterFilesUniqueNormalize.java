@@ -19,10 +19,22 @@ package ru.viise.papka.filter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Filter that makes duplicate files into one file.
+ * @param <T> Type of files being filtered.
+ * @see ru.viise.papka.filter.Filter
+ */
 public class FilterFilesUniqueNormalize<T> implements Filter<List<T>> {
 
+    /**
+     * List of raw files with duplicates.
+     */
     private final List<T> rawFiles;
 
+    /**
+     * Ctor.
+     * @param rawFiles List of raw files with duplicates.
+     */
     public FilterFilesUniqueNormalize(List<T> rawFiles) {
         this.rawFiles = rawFiles;
     }

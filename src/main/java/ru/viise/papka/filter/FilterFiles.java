@@ -22,11 +22,28 @@ import ru.viise.papka.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Filter files.
+ * @param <T> Type of files being filtered.
+ * @see ru.viise.papka.filter.Filter
+ */
 public class FilterFiles<T> implements Filter<List<T>> {
 
+    /**
+     * {@link Search}.
+     */
     private final Search<List<T>, String> search;
+
+    /**
+     * Filter condition.
+     */
     private final String regex;
 
+    /**
+     * Ctor.
+     * @param search {@link Search}.
+     * @param regex Filter condition.
+     */
     public FilterFiles(Search<List<T>, String> search, String regex) {
         this.search = search;
         this.regex = regex;

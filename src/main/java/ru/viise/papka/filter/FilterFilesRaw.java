@@ -22,11 +22,27 @@ import ru.viise.papka.search.Search;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Filter files like filename.
+ * @see ru.viise.papka.filter.Filter
+ */
 public class FilterFilesRaw implements Filter<List<String>> {
 
+    /**
+     * {@link Search}.
+     */
     private final Search<List<String>, List<String>> search;
+
+    /**
+     * List of raw files.
+     */
     private final List<String> rawFiles;
 
+    /**
+     * Ctor.
+     * @param search {@link Search}.
+     * @param rawFiles List of raw files.
+     */
     public FilterFilesRaw(Search<List<String>, List<String>> search, List<String> rawFiles) {
         this.search = search;
         this.rawFiles = rawFiles;
