@@ -38,7 +38,6 @@ public class NameFolderRoot implements Name {
             return false;
 
         if(((Name) name).fullName().equals(fullName()))
-            if(((Name) name).shortName().equals(shortName()))
                 return true;
 
         return super.equals(name);
