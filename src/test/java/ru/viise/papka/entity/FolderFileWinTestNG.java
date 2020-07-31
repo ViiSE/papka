@@ -263,28 +263,60 @@ public class FolderFileWinTestNG {
         }
     }
 
-    @Test(priority = 13)
+    @Test
     public void files_withNotRootName() {
         Folder<File> actual = new FolderFileWin(
-                new NamePure("music"),
-                "music\\misc\\1.mp3",
-                "music\\misc\\2.mp3",
-                "music\\misc\\3.mp3",
-                "music\\ms.mp3"
+                new NamePure("C:\\music", new SeparatorWin()),
+                "C:\\music\\misc\\1.mp3",
+                "C:\\music\\misc\\2.mp3",
+                "C:\\music\\misc\\3.mp3",
+                "C:\\music\\ms.mp3"
         );
 
-        Folder<String> expected = new FolderPure<>(
-                "music",
-                new ArrayList<String>() {{ add("music\\ms.mp3"); }},
+        Folder<File> expected = new FolderPure<>(
+                new NamePure("/\\C:\\music", new SeparatorWin()),
+                new ArrayList<File>() {{ add(new File("C:\\music\\ms.mp3")); }},
                 new FolderPure<>(
-                        "music\\misc",
-                        "music\\misc\\1.mp3",
-                        "music\\misc\\2.mp3",
-                        "music\\misc\\3.mp3"
+                        new NamePure("/\\C:\\music\\misc", new SeparatorWin()),
+                        new File("C:\\music\\misc\\1.mp3"),
+                        new File("C:\\music\\misc\\2.mp3"),
+                        new File("C:\\music\\misc\\3.mp3")
                 )
         );
 
-        assertNotEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void files_withWrongRootName() {
+        Folder<File> actual = new FolderFileWin(
+                new NamePure("C:\\documents", new SeparatorWin()),
+                "C:\\music\\misc\\1.mp3",
+                "C:\\music\\misc\\2.mp3",
+                "C:\\music\\misc\\3.mp3",
+                "C:\\music\\ms.mp3"
+        );
+
+        Folder<File> expected = new FolderPure<>(
+                new NameFolderRoot(),
+                new ArrayList<>(),
+                new FolderPure<>(
+                        new NamePure("/\\C:", new SeparatorWin()),
+                        new ArrayList<>(),
+                        new FolderPure<>(
+                                new NamePure("/\\C:\\music", new SeparatorWin()),
+                                new ArrayList<File>() {{ add(new File("C:\\music\\ms.mp3")); }},
+                                new FolderPure<>(
+                                        new NamePure("/\\C:\\music\\misc", new SeparatorWin()),
+                                        new File("C:\\music\\misc\\1.mp3"),
+                                        new File("C:\\music\\misc\\2.mp3"),
+                                        new File("C:\\music\\misc\\3.mp3")
+                                )
+                        )
+                )
+        );
+
+        assertEquals(expected, actual);
     }
 
     @Test

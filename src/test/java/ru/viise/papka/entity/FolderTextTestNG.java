@@ -3,6 +3,7 @@ package ru.viise.papka.entity;
 import org.testng.annotations.Test;
 import utils.PrintTest;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -224,16 +225,44 @@ public class FolderTextTestNG {
 
         Folder<String> expected = new FolderPure<>(
                 "/music",
-                new ArrayList<String>() {{ add("/music/ms.mp3"); }},
+                new ArrayList<String>() {{ add("ms.mp3"); }},
                 new FolderPure<>(
                         "/music/misc",
-                        "/music/misc/1.mp3",
-                        "/music/misc/2.mp3",
-                        "/music/misc/3.mp3"
+                        "1.mp3",
+                        "2.mp3",
+                        "3.mp3"
                 )
         );
 
-        assertNotEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test(priority = 14)
+    public void files_withWrongRootName() {
+        Folder<String> actual = new FolderText(
+                new NamePure("/documents"),
+                "/music/misc/1.mp3",
+                "/music/misc/2.mp3",
+                "/music/misc/3.mp3",
+                "/music/ms.mp3"
+        );
+
+        Folder<String> expected = new FolderPure<>(
+                "/",
+                new ArrayList<>(),
+                new FolderPure<>(
+                        "/music",
+                        new ArrayList<String>() {{ add("ms.mp3"); }},
+                        new FolderPure<>(
+                                "/music/misc",
+                                "1.mp3",
+                                "2.mp3",
+                                "3.mp3"
+                        )
+                )
+        );
+
+        assertEquals(expected, actual);
     }
 
     private Folder<String> testFolder() {

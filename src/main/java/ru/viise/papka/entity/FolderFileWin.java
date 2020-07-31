@@ -37,7 +37,7 @@ public class FolderFileWin implements Folder<File> {
     /**
      * Folder name.
      */
-    private final Name name;
+    private Name name;
 
     /**
      * Folder files.
@@ -210,10 +210,16 @@ public class FolderFileWin implements Folder<File> {
 
         Folder<File> prepRoot = trFolder.grow();
         try {
+            String fullName = name.fullName();
+            if(fullName.charAt(0) != '/')
+                fullName = '/' + new SeparatorWin().pure() + fullName;
+            name = new NamePure(fullName, new SeparatorWin());
+
             Folder<File> searchFolder = new SearchFolderByFullName<>(prepRoot).answer(name.fullName());
             this.files = searchFolder.files();
             this.children = searchFolder.children();
         } catch (NotFoundException ex) {
+            this.name = new NameFolderRoot();
             this.files = prepRoot.files();
             this.children = prepRoot.children();
         }
@@ -260,10 +266,16 @@ public class FolderFileWin implements Folder<File> {
             return false;
         }
 
+        List filesF = ((Folder) folder).files();
+        files();
+
+        List childrenF = ((Folder) folder).children();
+        children();
+
         if(((Folder) folder).fullName().equals(this.fullName())) {
-            if(((Folder) folder).files().equals(files()))
-                if(((Folder) folder).children().equals(children()))
-                return true;
+            if(filesF.equals(this.files))
+                if(childrenF.equals(this.children))
+                    return true;
         }
 
         return super.equals(folder);

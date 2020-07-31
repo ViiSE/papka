@@ -250,7 +250,7 @@ public class FolderFileTestNG {
         root.travel(PrintTest::printFolderFile);
     }
 
-    @Test(priority = 13)
+    @Test
     public void files_withNotRootName() {
         Folder<File> actual = new FolderFile(
                 new NamePure("/music"),
@@ -260,18 +260,46 @@ public class FolderFileTestNG {
                 "/music/ms.mp3"
         );
 
-        Folder<String> expected = new FolderPure<>(
+        Folder<File> expected = new FolderPure<>(
                 "/music",
-                new ArrayList<String>() {{ add("/music/ms.mp3"); }},
+                new ArrayList<File>() {{ add(new File("/music/ms.mp3")); }},
                 new FolderPure<>(
                         "/music/misc",
-                        "/music/misc/1.mp3",
-                        "/music/misc/2.mp3",
-                        "/music/misc/3.mp3"
+                        new File("/music/misc/1.mp3"),
+                        new File("/music/misc/2.mp3"),
+                        new File("/music/misc/3.mp3")
                 )
         );
 
-        assertNotEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void files_withWrongRootName() {
+        Folder<File> actual = new FolderFile(
+                new NamePure("/documents"),
+                "/music/misc/1.mp3",
+                "/music/misc/2.mp3",
+                "/music/misc/3.mp3",
+                "/music/ms.mp3"
+        );
+
+        Folder<File> expected = new FolderPure<>(
+                "/",
+                new ArrayList<>(),
+                new FolderPure<>(
+                        "/music",
+                        new ArrayList<File>() {{ add(new File("/music/ms.mp3")); }},
+                        new FolderPure<>(
+                                "/music/misc",
+                                new File("/music/misc/1.mp3"),
+                                new File("/music/misc/2.mp3"),
+                                new File("/music/misc/3.mp3")
+                        )
+                )
+        );
+
+        assertEquals(expected, actual);
     }
 
     @Test

@@ -34,7 +34,7 @@ public class FolderFile implements Folder<File> {
     /**
      * Folder name.
      */
-    private final Name name;
+    private Name name;
 
     /**
      * Folder files.
@@ -178,6 +178,7 @@ public class FolderFile implements Folder<File> {
             this.files = searchFolder.files();
             this.children = searchFolder.children();
         } catch (NotFoundException ex) {
+            this.name = new NameFolderRoot();
             this.files = prepRoot.files();
             this.children = prepRoot.children();
         }
@@ -224,9 +225,15 @@ public class FolderFile implements Folder<File> {
             return false;
         }
 
+        List filesF = ((Folder) folder).files();
+        files();
+
+        List childrenF = ((Folder) folder).children();
+        children();
+
         if(((Folder) folder).fullName().equals(this.fullName())) {
-            if(((Folder) folder).files().equals(files()))
-                if(((Folder) folder).children().equals(children()))
+            if(filesF.equals(this.files))
+                if(childrenF.equals(this.children))
                 return true;
         }
 

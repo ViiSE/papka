@@ -34,7 +34,7 @@ public class FolderText implements Folder<String> {
     /**
      * Folder name.
      */
-    private final Name name;
+    private Name name;
 
     /**
      * Folder files.
@@ -118,6 +118,7 @@ public class FolderText implements Folder<String> {
             this.files = searchFolder.files();
             this.children = searchFolder.children();
         } catch (NotFoundException ex) {
+            this.name = new NameFolderRoot();
             this.files = prepRoot.files();
             this.children = prepRoot.children();
         }
@@ -164,10 +165,16 @@ public class FolderText implements Folder<String> {
             return false;
         }
 
+        List filesF = ((Folder) folder).files();
+        files();
+
+        List childrenF = ((Folder) folder).children();
+        children();
+
         if(((Folder) folder).fullName().equals(this.fullName())) {
-            if(((Folder) folder).files().equals(files()))
-                if(((Folder) folder).children().equals(children()))
-                return true;
+            if(filesF.equals(this.files))
+                if(childrenF.equals(this.children))
+                    return true;
         }
 
         return super.equals(folder);
