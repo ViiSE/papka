@@ -192,7 +192,7 @@ Filter<List<Folder<String>>> filter = new FilterFolders<>(
 List<Folder<String>> folders = filter.apply(); // {bch, bth}
 ```
 
-####Coping with duplicates
+#### Coping with duplicates
 Suppose we have the following raw list of <code>files</code>:
 ```
 /music/sound1.mp3
