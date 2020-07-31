@@ -227,7 +227,6 @@ public class FolderFile implements Folder<File> {
 
         List filesF = ((Folder) folder).files();
         files();
-
         List childrenF = ((Folder) folder).children();
         children();
 
