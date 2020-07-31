@@ -79,6 +79,18 @@ public class NameFoldersPath implements Name {
         return fullName;
     }
 
+    @Override
+    public boolean equals(Object name) {
+        if(!(name instanceof Name))
+            return false;
+
+        if(((Name) name).fullName().equals(fullName()))
+            if(((Name) name).shortName().equals(shortName()))
+                return true;
+
+        return super.equals(name);
+    }
+
     private String _fullName() {
         String fullName = String.join(separator.pure(), foldersName) + separator.pure();
         return fullName.replace(separator.pure() + separator.pure(), separator.pure());

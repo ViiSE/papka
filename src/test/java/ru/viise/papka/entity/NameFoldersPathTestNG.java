@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class NameFoldersPathTestNG {
 
@@ -53,5 +54,33 @@ public class NameFoldersPathTestNG {
         String shortName = fPathName.shortName();
 
         assertEquals(shortName, "opus");
+    }
+
+    @Test
+    public void eq() {
+        Name actual = new NameFoldersPath(foldersName);
+        Name expected = new NameFoldersPath(new ArrayList<String>() {{
+            add("/");
+            add("C:");
+            add("files");
+            add("music");
+            add("opus");
+        }});
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void eq_wrongType() {
+        Name actual = new NameFoldersPath(foldersName);
+        String expected = "/";
+        assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void eq_no() {
+        Name actual = new NameFoldersPath(foldersName);
+        Name expected = new NamePure("/music");
+        assertNotEquals(expected, actual);
     }
 }

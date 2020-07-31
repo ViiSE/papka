@@ -31,4 +31,16 @@ public class NameFolderRoot implements Name {
     public String fullName() {
         return "/";
     }
+
+    @Override
+    public boolean equals(Object name) {
+        if(!(name instanceof Name))
+            return false;
+
+        if(((Name) name).fullName().equals(fullName()))
+            if(((Name) name).shortName().equals(shortName()))
+                return true;
+
+        return super.equals(name);
+    }
 }

@@ -47,6 +47,7 @@ public class NamePure implements Name {
 
     /**
      * Ctor.
+     *
      * @param fullName Raw full name.
      */
     public NamePure(String fullName) {
@@ -55,7 +56,8 @@ public class NamePure implements Name {
 
     /**
      * Ctor.
-     * @param fullName Raw full name.
+     *
+     * @param fullName  Raw full name.
      * @param separator {@link Separator}.
      */
     public NamePure(String fullName, Separator separator) {
@@ -65,7 +67,7 @@ public class NamePure implements Name {
 
     @Override
     public String shortName() {
-        if(pureShortName == null)
+        if (pureShortName == null)
             fullInit();
 
         return pureShortName;
@@ -73,21 +75,10 @@ public class NamePure implements Name {
 
     @Override
     public String fullName() {
-        if(pureFullName == null)
+        if (pureFullName == null)
             fullInit();
 
         return pureFullName;
-    }
-
-    @Override
-    public boolean equals(Object name) {
-        if(!(name instanceof Name))
-                return false;
-
-        if(((Name) name).fullName().equals(this.fullName()))
-            return true;
-
-        return super.equals(name);
     }
 
     private String pure(String name) {
@@ -105,12 +96,12 @@ public class NamePure implements Name {
     public String init() {
         String name = fullName.replace("//", "/"); // for root folder
 
-        if(name.length() == 1)
+        if (name.length() == 1)
             return name;
 
-        if(name.charAt(name.length() - 1) == separator.charS())
+        if (name.charAt(name.length() - 1) == separator.charS())
             name = name.substring(0, name.length() - 1);
-        if(name.charAt(name.length() - 1) == separator.mirror().charS())
+        if (name.charAt(name.length() - 1) == separator.mirror().charS())
             name = name.substring(0, name.length() - 1);
         name = name.charAt(0) + name.substring(1).replace(separator.mirror().pure(), separator.pure());
         return name;
@@ -120,7 +111,7 @@ public class NamePure implements Name {
         String pureName = init();
         String[] names;
 
-        if(pureName.length() == 1) {
+        if (pureName.length() == 1) {
             pureShortName = pureName;
             pureFullName = pureName;
         } else {
@@ -128,5 +119,17 @@ public class NamePure implements Name {
             pureShortName = pure(names[names.length - 1]);
             pureFullName = pure(pureName);
         }
+    }
+
+    @Override
+    public boolean equals(Object name) {
+        if(!(name instanceof Name))
+            return false;
+
+        if(((Name) name).fullName().equals(fullName()))
+            if(((Name) name).shortName().equals(shortName()))
+                return true;
+
+        return super.equals(name);
     }
 }

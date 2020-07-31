@@ -37,4 +37,16 @@ public class NameSystemDriveWin implements Name {
             systemDrive = "C:";
         return systemDrive;
     }
+
+    @Override
+    public boolean equals(Object name) {
+        if(!(name instanceof Name))
+            return false;
+
+        if(((Name) name).fullName().equals(fullName()))
+            if(((Name) name).shortName().equals(shortName()))
+                return true;
+
+        return super.equals(name);
+    }
 }
