@@ -159,7 +159,7 @@ Search is carried out through the <code>Search</code> interface.
  Folder<String> folder = search.answer("doc") // doc
 ```
 ### Filter
-The interface <code>Filter</code> provides filtering. It differs from <code>Find</code> in that it does not throws 
+The interface <code>Filter</code> provides filtering. It differs from <code>Search</code> in that it does not throws 
 exceptions.
 <br>
 <br>
@@ -170,7 +170,7 @@ Suppose we have the following raw list of <code>files</code>:
 /music/sound2.mp3
 /music/sound2.mp3
 ```
-If using <code>Find</code>:
+If using <code>Search</code>:
 ```java
 Search<List<String>, List<String>> search = new SearchUniqueByList();
 List<String> uqFiles = search.answer(files); // throw NotFoundException
