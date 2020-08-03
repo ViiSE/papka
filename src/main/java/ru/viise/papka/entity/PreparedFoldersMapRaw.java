@@ -22,8 +22,8 @@ import ru.viise.papka.system.SeparatorUnix;
 import java.util.*;
 
 /**
- * Prepares folders as {@link Map}&lt;String, List&lt;String&gt;&gt;, where key is full folder name, and value is the list of short
- * folder filenames.
+ * Prepares folders as {@link Map}&lt;String, List&lt;String&gt;&gt;, where key is full folder name, and value is the
+ * list of short folder filenames.
  * @see ru.viise.papka.entity.PreparedFolders
  */
 public class PreparedFoldersMapRaw implements PreparedFolders<Map<String, List<String>>> {

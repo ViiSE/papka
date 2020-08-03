@@ -22,8 +22,8 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * Prepares folders as {@link Map}&lt;String, {@link Folder}&lt;File&gt;&gt;, where key is full folder name, and value is the folder
- * with files.
+ * Prepares folders as {@link Map}&lt;String, {@link Folder}&lt;File&gt;&gt;, where key is full folder name, and value
+ * is the folder with files.
  * @see ru.viise.papka.entity.PreparedFolders
  */
 public class PreparedFoldersMapFile implements PreparedFolders<Map<String, Folder<File>>> {

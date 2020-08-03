@@ -23,8 +23,8 @@ import java.io.File;
 import java.util.*;
 
 /**
- * Prepares folders as {@link Map}&lt;String, List&lt;File&gt;&gt;, where key is full folder name, and value is the list of folder
- * files.
+ * Prepares folders as {@link Map}&lt;String, List&lt;File&gt;&gt;, where key is full folder name, and value is the list
+ * of folder files.
  * @see ru.viise.papka.entity.PreparedFolders
  */
 public class PreparedFoldersMapFilesRaw implements PreparedFolders<Map<String, List<File>>> {
