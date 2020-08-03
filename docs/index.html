@@ -13,8 +13,25 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    @-webkit-keyframes gradientAnim {
+        0%{background-position:0 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0 50%}
+    }
+    @-moz-keyframes gradientAnim {
+        0%{background-position:0 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0 50%}
+    }
+    @keyframes gradientAnim {
+        0%{background-position:0 50%}
+        50%{background-position:100% 50%}
+        100%{background-position:0 50%}
+    }
+
     .cBody {
-        background: radial-gradient(circle, rgba(227,242,253,1) 0%, rgba(187,222,251,1) 100%);
+        /*background: radial-gradient(circle, rgba(227,242,253,1) 0%, rgba(187,222,251,1) 100%);*/
         position: absolute;
         max-width: 100%;
         padding: 1em;
@@ -45,6 +62,12 @@
     }
     html {
         height: 100%;
+        background:  radial-gradient(circle, #e3f2fd,  #bbdefb, #90CAF9, #64B5F6, #42A5F5, #2196F3);
+        background-size: 300% 300%;
+
+        -webkit-animation: gradientAnim 30s ease infinite;
+        -moz-animation: gradientAnim 30s ease infinite;
+        animation: gradientAnim 30s ease infinite;
     }
 </style>
 
