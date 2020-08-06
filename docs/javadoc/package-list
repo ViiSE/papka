@@ -1,5 +1,5 @@
-ru.viise.papka.entity
-ru.viise.papka.exception
-ru.viise.papka.filter
-ru.viise.papka.search
-ru.viise.papka.system
+com.github.viise.papka.entity
+com.github.viise.papka.exception
+com.github.viise.papka.filter
+com.github.viise.papka.search
+com.github.viise.papka.system
