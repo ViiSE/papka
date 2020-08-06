@@ -1,6 +1,6 @@
 package utils;
 
-import ru.viise.papka.entity.Folder;
+import com.github.viise.papka.entity.Folder;
 
 import java.io.File;
 
