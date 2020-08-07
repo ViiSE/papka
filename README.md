@@ -3,7 +3,7 @@
 # Papka
 Object-Oriented library for working with file tree.
 
-##Get
+## Get
 ```xml
 <dependency>
     <groupId>com.github.viise.papka</groupId>
