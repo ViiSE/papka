@@ -3,7 +3,7 @@ jdk:
 - openjdk8
 install: mvn install -DskipTests=true -Dgpg.skip=true -Dmaven.javadoc.skip=true -B -V
 script:
-- mvn -Dgpg.skip package
+- mvn -Dgpg.skip=true package
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 before_deploy:
