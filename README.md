@@ -3,7 +3,17 @@
 # Papka
 Object-Oriented library for working with file tree.
 
+##Get
+```xml
+<dependency>
+    <groupId>com.github.viise.papka</groupId>
+    <artifactId>papka</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
+
 ## Usage
+
 You have a raw filename list:
 <br>
 ```
