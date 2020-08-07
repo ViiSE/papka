@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.viise.papka</groupId>
-    <artifactId>Papka</artifactId>
-    <version>1.0.1</version>
+    <artifactId>papka</artifactId>
+    <version>1.0.2</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Object oriented library for working with file tree.</description>
@@ -96,6 +96,9 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <configuration>
+                            <javadocExecutable>${javadoc.home}</javadocExecutable>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
