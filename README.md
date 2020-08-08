@@ -1,15 +1,23 @@
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.viise.papka/papka.svg)](https://maven-badges.herokuapp.com/maven-central/one.util/streamex/)
 [![Build Status](https://travis-ci.com/viise/papka.svg?branch=master)](https://travis-ci.com/viise/papka)
 [![Code Coverage](https://codecov.io/github/viise/papka/coverage.svg)](https://codecov.io/gh/viise/papka)
 # Papka
 Object-Oriented library for working with file tree.
 
 ## Get
+
+#### Maven
 ```xml
 <dependency>
     <groupId>com.github.viise.papka</groupId>
     <artifactId>papka</artifactId>
     <version>1.0.2</version>
 </dependency>
+```
+
+#### Gradle
+```groovy
+implementation 'com.github.viise.papka:papka:1.0.2'
 ```
 
 ## Usage
