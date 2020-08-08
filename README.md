@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.viise.papka/papka.svg)](https://maven-badges.herokuapp.com/maven-central/one.util/streamex/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.viise.papka/papka.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.viise.papka/papka/)
 [![Build Status](https://travis-ci.com/viise/papka.svg?branch=master)](https://travis-ci.com/viise/papka)
 [![Code Coverage](https://codecov.io/github/viise/papka/coverage.svg)](https://codecov.io/gh/viise/papka)
 # Papka
