@@ -16,11 +16,11 @@
 
 package com.github.viise.papka.entity;
 
+import com.github.viise.papka.exception.NotFoundException;
 import com.github.viise.papka.search.SearchFolderByFullName;
 import com.github.viise.papka.system.Separator;
-import com.github.viise.papka.system.SeparatorWin;
-import com.github.viise.papka.exception.NotFoundException;
 import com.github.viise.papka.system.SeparatorUnix;
+import com.github.viise.papka.system.SeparatorWin;
 
 import java.io.File;
 import java.util.ArrayList;

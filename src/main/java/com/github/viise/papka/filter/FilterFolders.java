@@ -16,9 +16,9 @@
 
 package com.github.viise.papka.filter;
 
-import com.github.viise.papka.search.Search;
 import com.github.viise.papka.entity.Folder;
 import com.github.viise.papka.exception.NotFoundException;
+import com.github.viise.papka.search.Search;
 
 import java.util.ArrayList;
 import java.util.List;

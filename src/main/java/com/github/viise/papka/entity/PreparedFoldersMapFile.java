@@ -19,7 +19,10 @@ package com.github.viise.papka.entity;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Prepares folders as {@link Map}&lt;String, {@link Folder}&lt;File&gt;&gt;, where key is full folder name, and value

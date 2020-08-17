@@ -16,9 +16,9 @@
 
 package com.github.viise.papka.system;
 
+import com.github.viise.papka.entity.FoldersFileName;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import com.github.viise.papka.entity.FoldersFileName;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

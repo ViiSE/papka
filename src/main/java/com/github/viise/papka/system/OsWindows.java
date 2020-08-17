@@ -16,9 +16,9 @@
 
 package com.github.viise.papka.system;
 
+import com.github.viise.papka.entity.FoldersFile;
 import com.github.viise.papka.entity.FoldersFileNameWin;
 import com.github.viise.papka.entity.NameSystemDriveWin;
-import com.github.viise.papka.entity.FoldersFile;
 
 /**
  * OS Windows.

@@ -17,9 +17,9 @@
 package com.github.viise.papka.entity;
 
 import com.github.viise.papka.system.Separator;
-import org.testng.annotations.Test;
 import com.github.viise.papka.system.SeparatorUnix;
 import com.github.viise.papka.system.SeparatorWin;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;

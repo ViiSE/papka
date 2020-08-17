@@ -16,8 +16,8 @@
 
 package com.github.viise.papka.entity;
 
-import com.github.viise.papka.search.SearchFolderByFullName;
 import com.github.viise.papka.exception.NotFoundException;
+import com.github.viise.papka.search.SearchFolderByFullName;
 
 import java.util.ArrayList;
 import java.util.Arrays;

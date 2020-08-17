@@ -19,8 +19,6 @@ package com.github.viise.papka.system;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
 public class CurrentDirectoryTestNG {
 
     private Directory<String> dir;
