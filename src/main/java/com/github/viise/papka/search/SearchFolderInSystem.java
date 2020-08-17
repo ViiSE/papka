@@ -40,9 +40,19 @@ public class SearchFolderInSystem implements SearchFolder<File, String> {
     private final OsRepository osRepo;
 
     /**
-     * Name of the folder to start the search from.
+     * {@link Search} files type.
      */
-    private final String beginWith;
+    private final Search<List<File>, String> search;
+
+    /**
+     * Ctor.
+     * @param osRepo {@link OsRepository}.
+     * @param search {@link Search} method. (default @{{@link SearchFilesByFolderNameInSystem}})
+     */
+    public SearchFolderInSystem(OsRepository osRepo, Search<List<File>, String> search) {
+        this.osRepo = osRepo;
+        this.search = search;
+    }
 
     /**
      * Ctor.
@@ -50,8 +60,7 @@ public class SearchFolderInSystem implements SearchFolder<File, String> {
      * @param beginWith Name of the folder to start the search from.
      */
     public SearchFolderInSystem(OsRepository osRepo, String beginWith) {
-        this.osRepo = osRepo;
-        this.beginWith = beginWith;
+        this(osRepo, new SearchFilesByFolderNameInSystem(beginWith));
     }
 
     /**
@@ -64,8 +73,7 @@ public class SearchFolderInSystem implements SearchFolder<File, String> {
 
     @Override
     public Folder<File> answer(String regex) throws NotFoundException {
-        Search<List<File>, String> searchFiles = new SearchFilesByFolderNameInSystem(beginWith);
-        List<File> files = searchFiles.answer(regex);
+        List<File> files = search.answer(regex);
 
         Os os = osRepo.instance();
 

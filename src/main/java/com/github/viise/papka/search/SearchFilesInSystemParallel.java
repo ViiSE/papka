@@ -27,11 +27,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Search files in system.
+ * Search files in system with parallel mapping.
  * Regex supported.
  * @see Search
  */
-public class SearchFilesInSystem implements Search<List<File>, String> {
+public class SearchFilesInSystemParallel implements Search<List<File>, String> {
 
     /**
      * Name of the folder to start the search from.
@@ -47,7 +47,7 @@ public class SearchFilesInSystem implements Search<List<File>, String> {
      * Ctor.
      * @param beginWith Name of the folder to start the search from.
      */
-    public SearchFilesInSystem(String beginWith) {
+    public SearchFilesInSystemParallel(String beginWith) {
         this(beginWith, Integer.MAX_VALUE);
     }
 
@@ -56,7 +56,7 @@ public class SearchFilesInSystem implements Search<List<File>, String> {
      * @param beginWith Name of the folder to start the search from.
      * @param maxDepth Maximum number of levels of directories to visit. (default {@link Integer#MAX_VALUE})
      */
-    public SearchFilesInSystem(String beginWith, int maxDepth) {
+    public SearchFilesInSystemParallel(String beginWith, int maxDepth) {
         this.beginWith = beginWith;
         this.maxDepth = maxDepth;
     }
@@ -69,6 +69,7 @@ public class SearchFilesInSystem implements Search<List<File>, String> {
                             Paths.get(beginWith),
                             maxDepth,
                             (path, basicFileAttributes) -> path.toFile().getName().matches(regex) && !(path.toFile().isDirectory()))
+                    .parallel()
                     .map(Path::toFile)
                     .collect(Collectors.toList());
 

@@ -16,9 +16,9 @@
 
 package com.github.viise.papka.search;
 
+import com.github.viise.papka.exception.NotFoundException;
 import com.github.viise.papka.system.*;
 import org.testng.annotations.Test;
-import com.github.viise.papka.exception.NotFoundException;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class SearchFilesInSystemTestNG {
+public class SearchFilesInSystemParallelTestNG {
 
     @Test
     public void answer() throws NotFoundException {
@@ -42,7 +42,7 @@ public class SearchFilesInSystemTestNG {
 
         List<File> actual = actualFile(name, separator);
 
-        Search<List<File>, String> search = new SearchFilesInSystem(name);
+        Search<List<File>, String> search = new SearchFilesInSystemParallel(name);
         List<File> expected = search.answer("([^.]*)(" + ".txt" + "$)");
         Collections.sort(expected);
 
@@ -62,7 +62,7 @@ public class SearchFilesInSystemTestNG {
 
         List<File> actual = actualFile(name, separator);
 
-        Search<List<File>, String> search = new SearchFilesInSystem(name, 1);
+        Search<List<File>, String> search = new SearchFilesInSystemParallel(name, 1);
         List<File> expected = search.answer("([^.]*)(" + ".txt" + "$)");
         Collections.sort(expected);
 
@@ -79,14 +79,14 @@ public class SearchFilesInSystemTestNG {
                 separator);
 
         String name = exDir.name() + "papkaExFolder";
-        Search<List<File>, String> search = new SearchFilesInSystem(name);
+        Search<List<File>, String> search = new SearchFilesInSystemParallel(name);
 
         search.answer("thisFilesIsNotExist.txt");
     }
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_ioException() throws NotFoundException {
-        Search<List<File>, String> search = new SearchFilesInSystem("ERROR");
+        Search<List<File>, String> search = new SearchFilesInSystemParallel("ERROR");
         search.answer("ERROR");
     }
 
