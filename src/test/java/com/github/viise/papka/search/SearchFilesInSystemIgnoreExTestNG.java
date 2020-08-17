@@ -18,16 +18,13 @@ package com.github.viise.papka.search;
 
 import com.github.viise.papka.exception.NotFoundException;
 import com.github.viise.papka.system.*;
-import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.testng.Assert.assertEquals;
 
 public class SearchFilesInSystemIgnoreExTestNG {
@@ -89,9 +86,7 @@ public class SearchFilesInSystemIgnoreExTestNG {
 
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_ioException() throws NotFoundException {
-        Search<List<File>, String> search = Mockito.spy(new SearchFilesInSystemIgnoreEx("ERROR"));
-        Mockito.when(search.answer(any())).thenThrow(NotFoundException.class);
-
+        Search<List<File>, String> search = new SearchFilesInSystemIgnoreEx("ERROR");
         search.answer("ERROR");
     }
 
