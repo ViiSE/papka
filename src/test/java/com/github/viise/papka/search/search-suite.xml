@@ -3,8 +3,25 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Search">
     <test name="SearchTest">
-        <packages>
-            <package name="com.github.viise.papka.search"/>
-        </packages>
+        <classes>
+            <class name="com.github.viise.papka.search.SearchByExtTestNG"/>
+            <class name="com.github.viise.papka.search.SearchByStartWithTestNG"/>
+            <class name="com.github.viise.papka.search.SearchDuplicatesByListTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesByContainsTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesByFolderNameInSystemTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesByFolderNameRegexTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesByFullNameRegexTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesByRegexTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesByShortNameRegexTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesInSystemIgnoreExTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesInSystemParallelTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFolderInSystemTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFolderByFullNameTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFolderByShortNameTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFolderChildByShortNameTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesInSystemTestNG"/>
+            <class name="com.github.viise.papka.search.SearchFilesByRegexTestNG"/>
+            <class name="com.github.viise.papka.search.SearchUniqueByListTestNG"/>
+        </classes>
     </test>
 </suite>
