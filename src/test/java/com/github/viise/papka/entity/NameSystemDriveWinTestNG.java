@@ -16,27 +16,19 @@
 
 package com.github.viise.papka.entity;
 
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.testng.PowerMockTestCase;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
-@PrepareForTest(System.class)
-public class NameSystemDriveWinTestNG extends PowerMockTestCase {
+public class NameSystemDriveWinTestNG {
 
     // all tests   - 10
     // basic tests - 7
     // mock tests  - 3
     private final int basicTestsCount = 7;
     private boolean mockTrigger = false;
-    private final String mockSystemDrive = "C:";
-    private final String attrName = "SystemDrive";
 
     private boolean isWindows;
     private Name sysDriveName;
@@ -47,88 +39,86 @@ public class NameSystemDriveWinTestNG extends PowerMockTestCase {
         sysDriveName = new NameSystemDriveWin();
     }
 
-    @Test(priority = 1)
+    @Test
+    public void ctor_withSystemDriveName() {
+        new NameSystemDriveWin("C:");
+    }
+
+    @Test
     public void shortName_notWindows() {
         if(!isWindows) {
             String sysDrive = sysDriveName.shortName();
-            assertEquals(sysDrive, mockSystemDrive);
+            assertEquals(sysDrive, "C:");
         }
     }
 
-    @Test(priority = 2)
+    @Test
     public void fullName_notWindows() {
         if(!isWindows) {
             String sysDrive = sysDriveName.fullName();
-            assertEquals(sysDrive, mockSystemDrive);
+            assertEquals(sysDrive, "C:");
         }
     }
 
-    @Test(description = "Only on windows", priority = 3)
+    @Test(description = "Only on windows")
     public void fullName_windows() {
         if(isWindows) {
             String sysDrive = sysDriveName.fullName();
-            assertEquals(sysDrive, System.getenv(attrName));
+            assertEquals(sysDrive, System.getenv("SystemDrive"));
         }
     }
 
-    @Test(description = "Only on windows", priority = 4)
+    @Test(description = "Only on windows")
     public void shortName_windows() {
         if(isWindows) {
             String sysDrive = sysDriveName.shortName();
-            assertEquals(sysDrive, System.getenv(attrName));
+            assertEquals(sysDrive, System.getenv("SystemDrive"));
         }
     }
 
-    @Test(priority = 5)
+    @Test
     public void eq() {
         if(isWindows) {
-            Name expected = new NamePure(System.getenv(attrName));
+            Name expected = new NamePure(System.getenv("SystemDrive"));
             assertEquals(expected, sysDriveName);
         } else {
-            Name expected = new NamePure(mockSystemDrive);
+            Name expected = new NamePure("C:");
             assertEquals(expected, sysDriveName);
         }
     }
 
-    @Test(priority = 6)
+    @Test
     public void eq_wrongType() {
-        assertNotEquals(mockSystemDrive, sysDriveName);
+        assertNotEquals("C:", sysDriveName);
     }
 
-    @Test(priority = 7)
+    @Test
     public void eq_no() {
         Name expected = new NamePure("C:\\music");
         assertNotEquals(expected, sysDriveName);
     }
 
-    @Test(description = "Windows mock", priority = 8)
-    public void fullName_windowsMock() {
-        String sysDrive = sysDriveName.fullName();
-        assertEquals(sysDrive, mockSystemDrive);
+    @Test
+    public void fullName_customSystemDrive() {
+        NameSystemDriveWin customSysDrive = new NameSystemDriveWin("C:");
+
+        String sysDrive = customSysDrive.fullName();
+        assertEquals(sysDrive, "C:");
     }
 
-    @Test(description = "Windows mock", priority = 9)
+    @Test(description = "Windows mock")
     public void shortName_windowsMock() {
-        String sysDrive = sysDriveName.shortName();
-        assertEquals(sysDrive, mockSystemDrive);
+        NameSystemDriveWin customSysDrive = new NameSystemDriveWin("C:");
+
+        String sysDrive = customSysDrive.shortName();
+        assertEquals(sysDrive, "C:");
     }
 
-    @Test(priority = 10)
+    @Test
     public void eqMock() {
-        Name expected = new NamePure(mockSystemDrive);
-        assertEquals(expected, sysDriveName);
-    }
+        NameSystemDriveWin customSysDrive = new NameSystemDriveWin("C:");
 
-    @AfterMethod
-    public void afterTest(ITestContext ctx) {
-        if(ctx.getPassedTests().size() == basicTestsCount) {
-            if(!mockTrigger) {
-                PowerMockito.mockStatic(System.class);
-                PowerMockito.when(System.getenv(attrName)).thenReturn(mockSystemDrive);
-                PowerMockito.verifyStatic(System.class);
-
-                mockTrigger = true;
-            }
-        }
+        Name expected = new NamePure("C:");
+        assertEquals(expected, customSysDrive);
     }
 }

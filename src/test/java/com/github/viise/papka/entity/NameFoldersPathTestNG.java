@@ -73,6 +73,15 @@ public class NameFoldersPathTestNG {
     }
 
     @Test
+    public void shortName_twiceForCheckInit() {
+        Name fPathName = new NameFoldersPath(foldersName, new SeparatorWin());
+        String shortName = fPathName.shortName();
+        fPathName.shortName();
+
+        assertEquals(shortName, "opus");
+    }
+
+    @Test
     public void eq() {
         Name actual = new NameFoldersPath(foldersName);
         Name expected = new NameFoldersPath(new ArrayList<String>() {{

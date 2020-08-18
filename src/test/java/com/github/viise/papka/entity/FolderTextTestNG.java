@@ -19,6 +19,7 @@ package com.github.viise.papka.entity;
 import org.testng.annotations.Test;
 import utils.PrintTest;
 
+import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -231,6 +232,7 @@ public class FolderTextTestNG {
     public void eq_notFullName() {
         Folder<String> actual = testFolder();
         Folder<String> expected = new FolderText(
+                new NamePure("/music"),
                 "/music/root124",
                 "/music/root1.png",
                 "/music/root2.png",

@@ -22,20 +22,34 @@ package com.github.viise.papka.entity;
  */
 public class NameSystemDriveWin implements Name {
 
+    /**
+     * System drive name.
+     */
+    private final String sysDriveName;
+
+    /**
+     * Ctor.
+     * @param sysDriveName System drive name. (default - System.getenv("SystemDrive"))
+     */
+    public NameSystemDriveWin(String sysDriveName) {
+        this.sysDriveName = sysDriveName;
+    }
+
+    /**
+     * Ctor.
+     */
+    public NameSystemDriveWin() {
+        this(System.getenv("SystemDrive"));
+    }
+
     @Override
     public String shortName() {
-        String systemDrive = System.getenv("SystemDrive");
-        if(systemDrive == null)
-            systemDrive = "C:";
-        return systemDrive;
+        return sysDriveName == null ? "C:" : sysDriveName;
     }
 
     @Override
     public String fullName() {
-        String systemDrive = System.getenv("SystemDrive");
-        if(systemDrive == null)
-            systemDrive = "C:";
-        return systemDrive;
+        return sysDriveName == null ? "C:" : sysDriveName;
     }
 
     @Override
