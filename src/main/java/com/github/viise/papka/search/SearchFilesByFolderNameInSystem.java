@@ -39,11 +39,26 @@ public class SearchFilesByFolderNameInSystem implements Search<List<File>, Strin
     private final String beginWith;
 
     /**
+     * Maximum number of levels of directories to visit.
+     */
+    private final int maxDepth;
+
+    /**
      * Ctor.
      * @param beginWith Name of the folder to start the search from.
      */
     public SearchFilesByFolderNameInSystem(String beginWith) {
+        this(beginWith, Integer.MAX_VALUE);
+    }
+
+    /**
+     * Ctor.
+     * @param beginWith Name of the folder to start the search from.
+     * @param maxDepth Maximum number of levels of directories to visit. (default {@link Integer#MAX_VALUE})
+     */
+    public SearchFilesByFolderNameInSystem(String beginWith, int maxDepth) {
         this.beginWith = beginWith;
+        this.maxDepth = maxDepth;
     }
 
     @Override
@@ -52,7 +67,7 @@ public class SearchFilesByFolderNameInSystem implements Search<List<File>, Strin
             List<File> files = Files
                     .find(
                             Paths.get(beginWith),
-                            Integer.MAX_VALUE,
+                            maxDepth,
                             (path, basicFileAttributes) -> path.toFile().getParent().matches(regex) && !(path.toFile().isDirectory()))
                     .map(Path::toFile)
                     .collect(Collectors.toList());
