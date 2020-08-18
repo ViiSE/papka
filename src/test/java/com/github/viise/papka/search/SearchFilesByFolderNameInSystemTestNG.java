@@ -50,6 +50,26 @@ public class SearchFilesByFolderNameInSystemTestNG {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void answer_maxDepthIs1() throws NotFoundException {
+        OsRepository osRepo = new OsRepo();
+        Separator separator = osRepo.instance().separator();
+
+        Directory<String> exDir = new ExampleDirectory(
+                new CurrentDirectory(separator),
+                separator);
+
+        String name = exDir.name() + "depth";
+
+        List<File> actual = actualFileDepth(name, separator);
+
+        Search<List<File>, String> search = new SearchFilesByFolderNameInSystem(name, 1);
+        List<File> expected = search.answer("^.*depth.*$");
+        Collections.sort(expected);
+
+        assertEquals(expected, actual);
+    }
+
     @Test(expectedExceptions = NotFoundException.class)
     public void answer_notFound() throws NotFoundException {
         OsRepository osRepo = new OsRepo();
@@ -72,6 +92,15 @@ public class SearchFilesByFolderNameInSystemTestNG {
         files.add(new File(name + separator.pure() + "papkaExFile.pdf"));
         files.add(new File(name + separator.pure() + "papkaExFile.txt"));
         files.add(new File(name + separator.pure() + "papkaMusic.mp3"));
+
+        return files;
+    }
+
+    private List<File> actualFileDepth(String name, Separator separator) {
+        List<File> files = new ArrayList<>();
+        files.add(new File(name + separator.pure() + "anotherPapkaExFile.txt"));
+        files.add(new File(name + separator.pure() + "papkaExFile.pdf"));
+        files.add(new File(name + separator.pure() + "papkaExFile.txt"));
 
         return files;
     }

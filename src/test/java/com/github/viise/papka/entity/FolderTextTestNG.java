@@ -192,13 +192,30 @@ public class FolderTextTestNG {
     }
 
     @Test(priority = 9)
+    public void travel_twiceThenCheckInit() {
+        Folder<String> root = new FolderText(
+                "/root1.png",
+                "/music/a.mp3",
+                "/music/opus/b.mp3",
+                "/music/opus/var/var.mp3",
+                "/music/opus/bar/bar.mp3",
+                "/opes/b.png",
+                "/music/opus/ar.mp3",
+                "/root2.png",
+                "/root3.png");
+
+        root.travel(PrintTest::printFolder);
+        root.travel(PrintTest::printFolder);
+    }
+
+    @Test(priority = 10)
     public void shortName() {
         String shortName = testFolder().shortName();
         assertNotNull(shortName);
         assertEquals(shortName, "/");
     }
 
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void eq() {
         Folder<String> actual = testFolder();
         Folder<String> expected = new FolderText(
@@ -210,7 +227,46 @@ public class FolderTextTestNG {
         assertEquals(expected, actual);
     }
 
-    @Test(priority = 11)
+    @Test(priority = 12)
+    public void eq_notFullName() {
+        Folder<String> actual = testFolder();
+        Folder<String> expected = new FolderText(
+                "/music/root124",
+                "/music/root1.png",
+                "/music/root2.png",
+                "/music/root3.png",
+                "/music/root33.png");
+
+        assertNotEquals(expected, actual);
+    }
+
+    @Test(priority = 13)
+    public void eq_fullNameButFilesNot() {
+        Folder<String> actual = testFolder();
+        Folder<String> expected = new FolderText(
+                "/root124",
+                "/root1.png",
+                "/root2.png",
+                "/root3.png",
+                "/root33.png");
+
+        assertNotEquals(expected, actual);
+    }
+
+    @Test(priority = 14)
+    public void eq_fullNameAndFilesButChildrenNot() {
+        Folder<String> actual = testFolder();
+        Folder<String> expected = new FolderText(
+                "/root124",
+                "/root1.png",
+                "/root2.png",
+                "/root3.png",
+                "/music/root33.png");
+
+        assertNotEquals(expected, actual);
+    }
+
+    @Test(priority = 15)
     public void eq_wrongType() {
         Folder<String> actual = testFolder();
         String folderFake = "/music";
@@ -218,7 +274,7 @@ public class FolderTextTestNG {
         assertNotEquals(folderFake, actual);
     }
 
-    @Test(priority = 12)
+    @Test(priority = 16)
     public void eq_no() {
         Folder<String> actual = testFolder();
         Folder<String> expected = new FolderText(
@@ -228,7 +284,7 @@ public class FolderTextTestNG {
         assertNotEquals(expected, actual);
     }
 
-    @Test(priority = 13)
+    @Test(priority = 17)
     public void files_withNotRootName() {
         Folder<String> actual = new FolderText(
                 new NamePure("/music"),
@@ -252,7 +308,7 @@ public class FolderTextTestNG {
         assertEquals(expected, actual);
     }
 
-    @Test(priority = 14)
+    @Test(priority = 18)
     public void files_withWrongRootName() {
         Folder<String> actual = new FolderText(
                 new NamePure("/documents"),

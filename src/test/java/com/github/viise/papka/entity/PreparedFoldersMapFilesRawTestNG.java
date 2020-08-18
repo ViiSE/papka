@@ -47,6 +47,7 @@ public class PreparedFoldersMapFilesRawTestNG {
         String name = exDir.name() + "papkaExFolder";
 
         List<File> files = actualFile(name, separator);
+        files.add(new File("/exampleForTest.txt"));
 
         PreparedFolders<Map<String, List<File>>> preparedFolders = new PreparedFoldersMapFilesRaw(
                 os.foldersFile(),
@@ -54,7 +55,7 @@ public class PreparedFoldersMapFilesRawTestNG {
                 files);
 
         Map<String, List<File>> actual = new TreeMap<>();
-        actual.put("/", new ArrayList<>());
+        actual.put("/", new ArrayList<File>() {{ add(new File("/exampleForTest.txt")); }});
         actual.put(name + separator.pure(), actualFile(name, separator));
 
         Map<String, List<File>> expected = preparedFolders.preparation();
