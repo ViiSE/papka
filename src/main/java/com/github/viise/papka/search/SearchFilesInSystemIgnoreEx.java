@@ -68,12 +68,12 @@ public class SearchFilesInSystemIgnoreEx implements Search<List<File>, String> {
             Files.
                     walkFileTree(Paths.get(beginWith), new HashSet<>(), maxDepth, new FileVisitor<Path>() {
                         @Override
-                        public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
+                        public FileVisitResult preVisitDirectory(Path path, BasicFileAttributes basicFileAttributes) {
                             return FileVisitResult.CONTINUE;
                         }
 
                         @Override
-                        public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) throws IOException {
+                        public FileVisitResult visitFile(Path path, BasicFileAttributes basicFileAttributes) {
                             if(!(basicFileAttributes.isDirectory())) {
                                 if (path.toFile().getName().matches(regex))
                                     files.add(path.toFile());
@@ -83,12 +83,12 @@ public class SearchFilesInSystemIgnoreEx implements Search<List<File>, String> {
                         }
 
                         @Override
-                        public FileVisitResult visitFileFailed(Path path, IOException e) throws IOException {
+                        public FileVisitResult visitFileFailed(Path path, IOException e) {
                             return FileVisitResult.SKIP_SUBTREE;
                         }
 
                         @Override
-                        public FileVisitResult postVisitDirectory(Path path, IOException e) throws IOException {
+                        public FileVisitResult postVisitDirectory(Path path, IOException e) {
                             return FileVisitResult.CONTINUE;
                         }
                     });
