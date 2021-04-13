@@ -145,7 +145,7 @@ Search is carried out through the <code>Search</code> interface.
 <br>
 <b>Search files</b>
 ```java
- Find<List<String>, String> search = new SearchFilesByRegex(root);
+ Search<List<String>, String> search = new SearchFilesByRegex(root);
  List<String> files = search.answer("a.mp3") // {a.mp3}
 ```
 <b>Search files by extension</b>
@@ -219,7 +219,6 @@ Suppose we have the following raw list of <code>files</code>:
 /music/sound2.mp3
 ```
 We want to keep one value for each duplicate. We can use `FilterFilesUniqueNormalize`:
-Also <code>Filter</code> can be used for folders: 
 ```java
 Filter<List<String>> filter = new FilterFilesUniqueNormalize<>(files);
 List<String> normFiles = filter.apply(); // {/music/sound1.mp3, /music/sound2.mp3}
